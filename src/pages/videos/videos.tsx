@@ -3,7 +3,7 @@ import "./videos.scss";
 const Videos = () => {
   const videoList = [
     {
-      url: "https://www.youtube.com/embed/K53vY4S8iL4",
+      url: "https://www.youtube.com/embed/Ls02w5BTWFY",
       description: "Foley work from Kichadi Bhat short film",
     },
     {
