@@ -1,32 +1,36 @@
 import "./videos.scss";
+
 const Videos = () => {
   const videoList = [
     {
-      file: "2.mov",
-      description: "Foley work from kichadi Bhat short film",
+      url: "https://www.youtube.com/embed/K53vY4S8iL4",
+      description: "Foley work from Kichadi Bhat short film",
     },
     {
-      file: "3.mov",
-      description: "Foley work from kichadi Bhat short film",
+      url: "https://www.youtube.com/embed/4_9klw7Qobc",
+      description: "Another Foley sample from Kichadi Bhat short film",
     },
     {
-      file: "4.mov",
-      description: "Foley work from kichadi Bhat short film",
+      url: "https://www.youtube.com/embed/LufYFH_gaAs",
+      description: "Creative foley demonstration in short film scene",
     },
   ];
+
   return (
     <div className="video-outlet">
       <div className="title">Videos</div>
 
       <div className="video-wrapper">
         {videoList.map((video, index) => (
-          <div className="video-with-description">
-            <video className="video-sample" key={index} controls>
-              <source
-                src={`/public/assets/videos/${video.file}`}
-                type="video/mp4"
-              />
-            </video>
+          <div className="video-with-description" key={index}>
+            <iframe
+              className="video-sample"
+              src={video.url}
+              title={`YouTube video ${index + 1}`}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
             <div className="video-description">{video.description}</div>
           </div>
         ))}
