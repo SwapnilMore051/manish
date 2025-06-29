@@ -1,0 +1,46 @@
+.app-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: lightblue;
+  align-items: center;
+  //   position: sticky;
+}
+
+.profile {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  .artist-name {
+    font-weight: bold;
+  }
+
+  .artist-title {
+    font-style: italic;
+    font-size: small;
+  }
+}
+
+.menu {
+  display: flex;
+  gap: 18px;
+}
+
+.menu-option {
+  cursor: pointer;
+  color: rgb(0, 155, 207);
+
+  transition: color 0.3s;
+
+  &:hover {
+    color: rgb(33, 126, 157);
+  }
+
+  &.active {
+    font-weight: bold;
+    color: rgb(8, 49, 62);
+    // border-bottom: 2px solid   ;
+  }
+}

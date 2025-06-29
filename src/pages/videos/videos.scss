@@ -1,0 +1,35 @@
+.video-outlet {
+  width: 100%;
+}
+
+.video-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 12px;
+  justify-content: center;
+  padding-bottom: 12px;
+}
+
+.video-sample {
+  border-radius: 16px 16px 0 0;
+}
+
+.video-with-description {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  max-width: calc(33.33% - 16px);
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: calc(33.33% - 16px);
+  //   background-color: var(--white);
+  border-radius: 16px;
+  border: 1px solid var(--white);
+  background-color: #f1f1f1;
+}
+
+.video-description {
+  padding: 0 12px 12px 12px;
+}

@@ -1,0 +1,27 @@
+.home-wrapper{
+    background-image: url('/assets/icons/home-bg.jpg');
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.main-heading{
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.sub-heading{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+}
+
+.sub-titles{
+    font-size: 18px;
+}
