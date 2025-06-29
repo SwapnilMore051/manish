@@ -33,6 +33,7 @@ const About = () => {
       project: "Sakhrrech Zaad",
       cover_image: "/assets/icons/sakhrrech-zaad.jpg",
       description: "Sakhrech Zaad was marathi short film, which was made for Film Festival.",
+      link: "https://youtu.be/PUammeKKHl8?si=A1GsClIcM_rKiZJb",
     },
     {
       project: "Souled Out",
