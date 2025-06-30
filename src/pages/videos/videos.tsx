@@ -7,7 +7,7 @@ const Videos = () => {
       description: "Foley work from Kichadi Bhat short film",
     },
     {
-      url: "https://www.youtube.com/embed/4_9klw7Qobc",
+      url: "https://www.youtube.com/embed/kgFubgka_DY",
       description: "Another Foley sample from Kichadi Bhat short film",
     },
     {
