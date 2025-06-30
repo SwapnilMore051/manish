@@ -32,3 +32,27 @@
 .contact-text {
   font-size: 16px;
 }
+
+.contact-icon {
+  width: 36px;
+}
+
+@media screen and (max-width: 768px) {
+  .contact-wrapper {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+
+  .contact-icon {
+    width: 24px;
+  }
+
+  .contact-text {
+    font-size: 12px;
+  }
+
+  .contact-option {
+    gap: 4px;
+    width: 151px; //hardcoded
+  }
+}

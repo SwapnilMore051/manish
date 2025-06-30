@@ -44,3 +44,10 @@
     // border-bottom: 2px solid   ;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .app-header {
+    flex-direction: column;
+  }
+  
+}

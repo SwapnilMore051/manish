@@ -34,7 +34,7 @@ const Contact = () => {
       <div className="contact-wrapper">
         {contactOptions.map((option, index) => (
           <div className="contact-option" onClick={option.onClick} key={index}>
-            <img className="contact-icon" src={option.icon} alt="" width={36} />
+            <img className="contact-icon" src={option.icon} alt="" />
             <div className="contact-text">{option.text}</div>
           </div>
         ))}

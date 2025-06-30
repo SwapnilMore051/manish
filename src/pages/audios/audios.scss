@@ -49,3 +49,12 @@ audio {
   font-size: 14px;
   color: #333;
 }
+
+
+@media screen and (max-width: 768px) {
+  .audio-item {
+    max-width: calc(100% - 16px);
+    flex-basis: calc(100% - 16px);
+  }
+  
+}
