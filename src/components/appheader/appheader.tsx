@@ -40,7 +40,7 @@ const Appheader = () => {
 
   return (
     <div className="app-header">
-      <div className="profile">
+      <div className="profile" onClick={() => scrollToSection("home")} >
         <img src="/assets/logo.png" alt="Logo" width={30} />
         <div className="artist-name">Manish More</div>
         <div className="artist-title">
@@ -51,9 +51,8 @@ const Appheader = () => {
         {sections.map((section) => (
           <div
             key={section}
-            className={`menu-option ${
-              activeSection === section ? "active" : ""
-            }`}
+            className={`menu-option ${activeSection === section ? "active" : ""
+              }`}
             onClick={() => scrollToSection(section)}
           >
             {section.charAt(0).toUpperCase() + section.slice(1)}
