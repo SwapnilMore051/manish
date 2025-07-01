@@ -41,7 +41,7 @@ const Appheader = () => {
   return (
     <div className="app-header">
       <div className="profile" onClick={() => scrollToSection("home")} >
-        <img src="/assets/logo.png" alt="Logo" width={30} />
+        <img src="/assets/logo.jpg" alt="Logo" width={30} />
         <div className="artist-name">Manish More</div>
         <div className="artist-title">
           Foley Artist / Assistant recordist / Boom Operator
