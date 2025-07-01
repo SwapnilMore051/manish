@@ -11,7 +11,7 @@ const Videos = () => {
       description: "Another Foley sample from Kichadi Bhat short film",
     },
     {
-      url: "https://www.youtube.com/embed/LufYFH_gaAs",
+      url: "https://www.youtube.com/embed/f6mBSTCDAJM",
       description: "Creative foley demonstration in short film scene",
     },
   ];
