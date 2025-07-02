@@ -1,5 +1,6 @@
 import About from "../about/about";
 import Audios from "../audios/audios";
+import BehindTheScene from "../bts/bts";
 import Contact from "../contact/contact";
 import Home from "../home/home";
 import Videos from "../videos/videos";
@@ -12,6 +13,7 @@ const MainPage = () => {
       <section id="videos"><Videos /></section>
       <section id="audios"><Audios /></section>
       <section id="about"><About /></section>
+      <section id="contact"><BehindTheScene /></section>
       <section id="contact"><Contact /></section>
     </div>
   );
