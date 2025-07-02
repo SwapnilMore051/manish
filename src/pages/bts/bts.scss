@@ -1,0 +1,29 @@
+.bts-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bts-image-container {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+  width: calc(100% - 16px);
+}
+
+.bts-image {
+  border-radius: 8px;
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .bts-image {
+    width: 100%;
+  }
+
+  .bts-image-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
