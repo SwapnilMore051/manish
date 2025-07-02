@@ -32,7 +32,7 @@ const BehindTheScene = () => {
         <div className= "bts-video-container">
 
         {btsVideos.map((video, index) => (
-          <div key={index}>
+          <div className="bts-video" key={index}>
             <iframe
               className="bts-video"
               src={video}
