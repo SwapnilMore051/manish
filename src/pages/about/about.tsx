@@ -36,6 +36,11 @@ const About = () => {
       description: "Sakhrech Zaad was marathi short film, which was made for Film Festival.",
     },
     {
+      project: "Mrudgandha",
+      cover_image: "/assets/icons/mrudgandha.jpg",
+      description: "A marathi festival film. I worked as Foley Artist.",
+    },
+    {
       project: "Souled Out",
       cover_image: "/assets/icons/souled-out.jpg",
       description: "Marathi Web Series (Horror) on VDOJAR app.",
