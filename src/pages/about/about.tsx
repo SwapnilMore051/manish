@@ -38,7 +38,7 @@ const About = () => {
     {
       project: "Mrudgandha",
       cover_image: "/assets/icons/mrudgandha.jpg",
-      description: "A marathi festival film. I worked as Foley Artist.",
+      description: "A marathi short film for film festival. I worked as Foley Artist.",
     },
     {
       project: "Souled Out",
