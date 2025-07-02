@@ -13,7 +13,7 @@ const MainPage = () => {
       <section id="videos"><Videos /></section>
       <section id="audios"><Audios /></section>
       <section id="about"><About /></section>
-      <section id="contact"><BehindTheScene /></section>
+      <BehindTheScene /> {/* behind the scene container */}
       <section id="contact"><Contact /></section>
     </div>
   );
