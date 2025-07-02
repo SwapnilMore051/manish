@@ -42,6 +42,11 @@ const About = () => {
       link: "https://vdojar.com/Web/show_detail/32/1/5/58/souled-out"
     },
     {
+      project: "Maitar",
+      cover_image: "/assets/icons/maitar.jpg",
+      description: "'Maitar' is an Instagram Reel web series. I worked on this short-form series as an Assistant Recordist.",
+    },
+    {
       project: "Avtarla Sai",
       cover_image: "/assets/icons/sai.jpg",
       description: "As an assistant recordist for devotional songs, I helped capture the spiritual essence of each piece. My work involved setting up equipment, managing audio levels, and assisting in mixing to create high-quality recordings that inspire and uplift listeners. Each session was a meaningful collaboration that brought sacred music to life.",
