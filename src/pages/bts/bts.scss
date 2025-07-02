@@ -15,13 +15,10 @@
 .bts-image {
   border-radius: 8px;
   width: 100%;
+  height: 100%;
 }
 
 @media screen and (max-width: 600px) {
-  .bts-image {
-    width: 100%;
-  }
-
   .bts-image-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
