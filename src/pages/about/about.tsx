@@ -50,6 +50,7 @@ const About = () => {
       project: "Maitar",
       cover_image: "/assets/icons/maitar.jpg",
       description: "'Maitar' is an Instagram Reel web series. I worked on this short-form series as an Assistant Recordist.",
+      link: "https://www.instagram.com/reel/DLoZRCgPMVR/?igsh=MTJzejRld2FxcmR3bQ=="
     },
     {
       project: "Avtarla Sai",
