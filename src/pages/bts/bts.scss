@@ -51,8 +51,12 @@
   gap: 10px;
 }
 
-.modal-buttons button,
+.prev-next-button,
 .close-btn {
+  display: flex;
+  align-items: center;
+
+
   padding: 8px 14px;
   font-size: 14px;
   border: none;
@@ -62,10 +66,16 @@
   transition: background 0.2s;
 }
 
+.prev-next-text{
+  font-size: 14px;
+}
+
 .modal-buttons button:hover,
 .close-btn:hover {
   background-color: #eee;
 }
+
+
 
 @media screen and (max-width: 600px) {
   .bts-image-container {

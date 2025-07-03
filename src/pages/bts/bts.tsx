@@ -79,8 +79,16 @@ const BehindTheScene = () => {
             onClick={(e) => e.stopPropagation()}
           />
           <div className="modal-buttons" onClick={(e) => e.stopPropagation()}>
-            <button onClick={handlePreviousImage}>⟵ Previous</button>
-            <button onClick={handleNextImage}>Next ⟶</button>
+            <button className="prev-next-button" onClick={handlePreviousImage}>
+              <img src="/assets/icons/arrow_left.svg" alt="" />
+              <div className="prev-next-text">
+                Previous
+              </div>
+            </button>
+            <button className="prev-next-button" onClick={handleNextImage}>
+              <div className="prev-next-text">Next</div>
+              <img src="/assets/icons/arrow_right.svg" alt="" />
+            </button>
             <button className="close-btn" onClick={closeModal}>
               ✕
             </button>
