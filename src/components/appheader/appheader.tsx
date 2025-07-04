@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 const Appheader = () => {
   const [activeSection, setActiveSection] = useState("home");
-  const sections = ["home", "videos", "audios", "about", "contact"];
+  const sections = ["home", "about", "videos", "audios", "contact"];
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
