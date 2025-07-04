@@ -10,9 +10,9 @@ const MainPage = () => {
   return (
     <div className="main-page-outlet">
       <section id="home"><Home /></section>
+      <section id="about"><About /></section>
       <section id="videos"><Videos /></section>
       <section id="audios"><Audios /></section>
-      <section id="about"><About /></section>
       <BehindTheScene /> {/* behind the scene container */}
       <section id="contact"><Contact /></section>
     </div>
