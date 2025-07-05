@@ -3,38 +3,8 @@ import './audios.scss';
 const Audios = () => {
     const audioList = [
         {
-            file: 'audio_1.mp3',
-            image: "/assets/icons/audio-img-1.jpg",
-            description: 'Relaxing forest ambience',
-        },
-        {
-            file: 'audio_2.mp3',
-            image: "/assets/icons/audio-img-2.jpg",
-            description: 'City rain sounds',
-        },
-        {
-            file: 'audio_1.mp3',
-            image: "/assets/icons/audio-img-1.jpg",
-            description: 'Relaxing forest ambience',
-        },
-        {
-            file: 'audio_2.mp3',
-            image: "/assets/icons/audio-img-2.jpg",
-            description: 'City rain sounds',
-        },
-        {
-            file: 'audio_1.mp3',
-            image: "/assets/icons/audio-img-1.jpg",
-            description: 'Relaxing forest ambience',
-        },
-        {
-            file: 'audio_2.mp3',
-            image: "/assets/icons/audio-img-2.jpg",
-            description: 'City rain sounds',
-        },
-        {
-            file: 'audio_2.mp3',
-            image: "/assets/icons/audio-img-2.jpg",
+            file: 'alyad_palyad.mp3',
+            image: "/assets/icons/alyad-palyad.jpg",
             description: 'City rain sounds',
         },
     ];
