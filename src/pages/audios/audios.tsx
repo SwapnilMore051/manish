@@ -5,7 +5,7 @@ const Audios = () => {
         {
             file: 'alyad_palyad.mp3',
             image: "/assets/icons/alyad-palyad.jpg",
-            description: 'City rain sounds',
+            description: 'Alyad Palyad sounds',
         },
     ];
 
