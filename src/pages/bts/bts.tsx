@@ -4,16 +4,17 @@ import "./bts.scss";
 const BehindTheScene = () => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  const btsImages = [
-    "bts1.jpg",
-    "bts2.jpg",
-    "bts4.jpg",
-    "bts5.jpg",
-    "bts3.jpg",
+  const btsMedia = [
+    { type: "image", src: "bts1.jpg" },
+    { type: "image", src: "bts2.jpg" },
+    { type: "image", src: "bts4.jpg" },
+    { type: "image", src: "bts5.jpg" },
+    { type: "image", src: "bts3.jpg" },
+    { type: "video", src: "manish_vid1.mp4" },
+    { type: "video", src: "manish_vid2.mp4" },
   ];
 
-  const handleImageClick = (image: string) => {
-    const index = btsImages.findIndex((img) => img === image);
+  const handleMediaClick = (index: number) => {
     setSelectedIndex(index);
   };
 
@@ -21,31 +22,27 @@ const BehindTheScene = () => {
     setSelectedIndex(null);
   };
 
-  const handleNextImage = () => {
+  const handleNextMedia = () => {
     if (selectedIndex !== null) {
       setSelectedIndex((prevIndex) =>
-        prevIndex === btsImages.length - 1 ? 0 : prevIndex! + 1
+        prevIndex === btsMedia.length - 1 ? 0 : prevIndex! + 1
       );
     }
   };
 
-  const handlePreviousImage = () => {
+  const handlePreviousMedia = () => {
     if (selectedIndex !== null) {
       setSelectedIndex((prevIndex) =>
-        prevIndex === 0 ? btsImages.length - 1 : prevIndex! - 1
+        prevIndex === 0 ? btsMedia.length - 1 : prevIndex! - 1
       );
     }
   };
 
-  const currentImage =
-    selectedIndex !== null ? btsImages[selectedIndex] : null;
-
-  // Optional: Allow ESC key to close modal
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeModal();
-      if (e.key === "ArrowRight") handleNextImage();
-      if (e.key === "ArrowLeft") handlePreviousImage();
+      if (e.key === "ArrowRight") handleNextMedia();
+      if (e.key === "ArrowLeft") handlePreviousMedia();
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
@@ -55,43 +52,62 @@ const BehindTheScene = () => {
     <div className="bts-wrapper">
       <div className="title">Behind The Scene</div>
 
-      <div className="bts-image-container">
-        {btsImages.map((image, index) => (
-          <div key={index} onClick={() => setSelectedIndex(index)}>
-            <img
-              className="bts-image"
-              src={`/assets/icons/${image}`}
-              alt="behind the scene"
-              onClick={handleImageClick.bind(null, image)}
-            />
+      <div className="bts-media-container">
+        {btsMedia.map((media, index) => (
+          <div className="bts-img-vid-wrapper" key={index} onClick={() => handleMediaClick(index)}>
+            {media.type === "image" ? (
+              <img
+                className="bts-image"
+                src={`/assets/icons/${media.src}`}
+                alt="behind the scene"
+              />
+            ) : (
+              <video
+                className="bts-image"
+                src={`/assets/videos/${media.src}`}
+                muted
+                autoPlay
+                loop
+              />
+            )}
           </div>
         ))}
       </div>
 
-      <div className="bts-video-container">{/* Optional videos */}</div>
-
-      {currentImage && (
+      {selectedIndex !== null && (
         <div className="modal-overlay" onClick={closeModal}>
-          <img
-            className="modal-image"
-            src={`/assets/icons/${currentImage}`}
-            alt="Full size"
-            onClick={(e) => e.stopPropagation()}
-          />
-          <div className="modal-buttons" onClick={(e) => e.stopPropagation()}>
-            <button className="prev-next-button" onClick={handlePreviousImage}>
-              <img src="/assets/icons/arrow_left.svg" alt="" />
-              <div className="prev-next-text">
-                Previous
-              </div>
-            </button>
-            <button className="prev-next-button" onClick={handleNextImage}>
-              <div className="prev-next-text">Next</div>
-              <img src="/assets/icons/arrow_right.svg" alt="" />
-            </button>
-            <button className="close-btn" onClick={closeModal}>
-              ✕
-            </button>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            {btsMedia[selectedIndex].type === "image" ? (
+              <img
+                className="modal-image"
+                src={`/assets/icons/${btsMedia[selectedIndex].src}`}
+                alt="Full size"
+              />
+            ) : (
+              <video
+                className="modal-video"
+                src={`/assets/videos/${btsMedia[selectedIndex].src}`}
+                controls
+                autoPlay
+              />
+            )}
+
+            <div className="modal-buttons">
+              <button
+                className="prev-next-button"
+                onClick={handlePreviousMedia}
+              >
+                <img src="/assets/icons/arrow_left.svg" alt="" />
+                <div className="prev-next-text">Previous</div>
+              </button>
+              <button className="prev-next-button" onClick={handleNextMedia}>
+                <div className="prev-next-text">Next</div>
+                <img src="/assets/icons/arrow_right.svg" alt="" />
+              </button>
+              <button className="close-btn" onClick={closeModal}>
+                ✕
+              </button>
+            </div>
           </div>
         </div>
       )}
