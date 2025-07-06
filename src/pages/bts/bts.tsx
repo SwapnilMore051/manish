@@ -10,6 +10,7 @@ const BehindTheScene = () => {
     { type: "image", src: "bts4.jpg" },
     { type: "image", src: "bts5.jpg" },
     { type: "image", src: "bts3.jpg" },
+    { type: "image", src: "bts6.jpg" },
     { type: "video", src: "manish_vid1.mp4" },
     { type: "video", src: "manish_vid2.mp4" },
   ];
