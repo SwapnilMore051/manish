@@ -50,7 +50,7 @@ const BehindTheScene = () => {
 
   return (
     <div className="bts-wrapper">
-      <div className="title">Behind The Scene</div>
+      <div className="title">Gallery    </div>
 
       <div className="bts-media-container">
         {btsMedia.map((media, index) => (
