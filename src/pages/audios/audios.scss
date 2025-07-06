@@ -28,12 +28,17 @@
   box-sizing: border-box;
 
   background-color: white;
+  cursor: pointer;
+
+  &:hover {
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
 }
 
 .audio-cover-image {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: 300px;
   border-radius: 16px;
   margin-bottom: 8px;
 }
@@ -50,11 +55,9 @@ audio {
   color: #333;
 }
 
-
 @media screen and (max-width: 768px) {
   .audio-item {
     max-width: calc(100% - 16px);
     flex-basis: calc(100% - 16px);
   }
-  
 }
