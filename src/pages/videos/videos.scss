@@ -28,6 +28,12 @@
   border-radius: 16px;
   border: 1px solid var(--white);
   background-color: #f1f1f1;
+
+  &:hover {
+    transform: scale(1.02);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
 }
 
 .video-description {
@@ -46,5 +52,4 @@
     flex-shrink: 0;
     flex-basis: calc(100% - 16px);
   }
-  
 }

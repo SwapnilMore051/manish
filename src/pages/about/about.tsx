@@ -116,6 +116,9 @@ const About = () => {
         <br />
         I’m always looking to grow and contribute to creative projects, and I
         would truly appreciate the new opportunities.
+        <br />
+        <br />
+        And here are some of my projects:
       </div>
 
       <div className="projects-list">
