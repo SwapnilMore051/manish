@@ -115,7 +115,7 @@ const About = () => {
         <br />
         <br />
         I’m always looking to grow and contribute to creative projects, and I
-        would truly appreciate the new opportunities.
+        would truly appreciate the new opportunities.
         <br />
         <br />
         And here are some of my projects:
