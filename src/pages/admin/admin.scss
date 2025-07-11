@@ -15,6 +15,13 @@
   display: flex;
   gap: 12px;
   padding: 12px;
+
+}
+
+.setting-icon {
+  width: 16px;
+  height: 20px;
+  filter: brightness(0) saturate(100%) invert(60%);
 }
 
 .admin-setting {
@@ -27,11 +34,15 @@
   background: #f9f9f9;
   cursor: pointer;
   border: 1px solid #f4f4f4;
-  
+
+  text-decoration: none;
+
   &:hover {
     transform: scale(1.02);
     transition: box-shadow 0.3s ease, transform 0.2s ease;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background: #ebebeb;
+    border: 1px solid #e0e0e0;
   }
 }
 
@@ -41,4 +52,20 @@
   align-items: flex-start;
   gap: 4px;
   flex: 1 0 0;
+}
+
+.setting-title {
+  color: #141414;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: -0.08px;
+}
+
+.setting-description {
+  color: #767676;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  letter-spacing: -0.06px;
 }
