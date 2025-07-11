@@ -1,13 +1,5 @@
-import './App.css'
-import Appbase from './components/appbase/appbase'
-
+import './App.css';
 function App() {
-
-  return (
-
-    <Appbase />
-
-  )
+  return <></>;
 }
-
-export default App
+export default App;

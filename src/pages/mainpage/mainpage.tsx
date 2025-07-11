@@ -1,3 +1,4 @@
+// mainpage.tsx
 import About from "../about/about";
 import Audios from "../audios/audios";
 import BehindTheScene from "../bts/bts";
@@ -13,10 +14,9 @@ const MainPage = () => {
       <section id="about"><About /></section>
       <section id="videos"><Videos /></section>
       <section id="audios"><Audios /></section>
-      <BehindTheScene /> {/* behind the scene container */}
+      <BehindTheScene />
       <section id="contact"><Contact /></section>
     </div>
   );
 };
-
 export default MainPage;

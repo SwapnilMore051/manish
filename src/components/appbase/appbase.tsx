@@ -1,17 +1,15 @@
-import Appheader from "../appheader/appheader"
-// import { Outlet } from 'react-router-dom';
+import { Outlet } from "react-router-dom";
+import Appheader from "../appheader/appheader";
 import './app-base.scss';
-import MainPage from "../../pages/mainpage/mainpage";
 
 const Appbase = () => {
     return (
         <div className="app-container">
             <Appheader />
             <div className="outlet-wrapper">
-                <MainPage />
+                <Outlet />
             </div>
         </div>
-    )
-}
-
-export default Appbase
+    );
+};
+export default Appbase;
