@@ -7,6 +7,7 @@ import CrudAudio from './pages/admin/crud-audio/crud-audio';
 import CrudVideo from './pages/admin/crud-video/crud-video';
 import CrudGallery from './pages/admin/crud-gallery/crud-gallery';
 import CrudProject from './pages/admin/crud-project/crud-project';
+import AdminBase from './pages/admin/admin-base/admin-base';
 
 export const router = createBrowserRouter(
   [
@@ -22,24 +23,29 @@ export const router = createBrowserRouter(
     },
     {
       path: '/admin',
-      element: <Admin />,
-
-    },
-    {
-      path: '/admin/crud_audio',
-      element: <CrudAudio />,
-    },
-    {
-      path: '/admin/crud_video',
-      element: <CrudVideo />,
-    },
-    {
-      path: '/admin/crud_gallery',
-      element: <CrudGallery />,
-    },
-    {
-      path: '/admin/crud_projects',
-      element: <CrudProject />,
+      element: <AdminBase />,
+      children: [
+        {
+          path: '', // default route: /admin
+          element: <Admin />,
+        },
+        {
+          path: 'crud_audio',        // /admin/crud_audio
+          element: <CrudAudio />,
+        },
+        {
+          path: 'crud_video',        // /admin/crud_video
+          element: <CrudVideo />,
+        },
+        {
+          path: 'crud_gallery',      // /admin/crud_gallery
+          element: <CrudGallery />,
+        },
+        {
+          path: 'crud_projects',     // /admin/crud_projects
+          element: <CrudProject />,
+        },
+      ],
     },
     {
       path: '*',

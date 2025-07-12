@@ -9,35 +9,35 @@ const Admin = () => {
             title: "Audio",
             description: "Upload, update, and delete audio tracks for the portfolio.",
             icon: "/assets/icons/admin_audio.png",
-            link: "/admin/crud_audio",
+            link: "crud_audio",
         },
         {
             id: 2,
             title: "Video",
             description: "Upload, update, and delete videos showcasing your work.",
             icon: "/assets/icons/admin_video.png",
-            link: "/admin/crud_video",
+            link: "crud_video",
         },
         {
             id: 3,
             title: "Gallery",
             description: "Upload, update, and delete image galleries and photos.",
             icon: "/assets/icons/admin_gallery.png",
-            link: "/admin/crud_gallery",
+            link: "crud_gallery",
         },
         {
             id: 4,
             title: "Projects",
             description: "Add, update, and delete project entries and details.",
             icon: "/assets/icons/admin_image.png",
-            link: "/admin/crud_projects",
+            link: "crud_projects",
         },
     ]
 
 
+
     return (
         <div className='admin-panel-wrapper'>
-            <div className="admin-panel-title">Admin Panel</div>
             <div className='admin-settings-section'>
                 {adminSettings.map((setting, index) => (
                     <Link to={setting.link} className="admin-setting" key={index}>
