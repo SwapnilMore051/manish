@@ -1,8 +1,18 @@
 
+import CrudHeader from '../crud-header/crud-header';
 import './crud-audio.scss'
 const CrudAudio = () => {
     return (
-        <div>CrudAudio</div>
+        <div className='crud-audio-wrapper'>
+
+            <CrudHeader
+                title="Upload or update audio"
+                fileType="Add Audio"
+                onClick={() => {
+                    console.log("add audio");
+                }} />
+            audio
+        </div>
     )
 }
 

@@ -9,28 +9,28 @@ const Admin = () => {
             title: "Audio",
             description: "Upload, update, and delete audio tracks for the portfolio.",
             icon: "/assets/icons/admin_audio.png",
-            link: "crud_audio",
+            link: "crud-audio",
         },
         {
             id: 2,
             title: "Video",
             description: "Upload, update, and delete videos showcasing your work.",
             icon: "/assets/icons/admin_video.png",
-            link: "crud_video",
+            link: "crud-video",
         },
         {
             id: 3,
             title: "Gallery",
             description: "Upload, update, and delete image galleries and photos.",
             icon: "/assets/icons/admin_gallery.png",
-            link: "crud_gallery",
+            link: "crud-gallery",
         },
         {
             id: 4,
             title: "Projects",
             description: "Add, update, and delete project entries and details.",
             icon: "/assets/icons/admin_image.png",
-            link: "crud_projects",
+            link: "crud-projects",
         },
     ]
 

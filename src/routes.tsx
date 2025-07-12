@@ -26,23 +26,23 @@ export const router = createBrowserRouter(
       element: <AdminBase />,
       children: [
         {
-          path: '', // default route: /admin
+          path: '', 
           element: <Admin />,
         },
         {
-          path: 'crud_audio',        // /admin/crud_audio
+          path: 'crud-audio',
           element: <CrudAudio />,
         },
         {
-          path: 'crud_video',        // /admin/crud_video
+          path: 'crud-video',
           element: <CrudVideo />,
         },
         {
-          path: 'crud_gallery',      // /admin/crud_gallery
+          path: 'crud-gallery',
           element: <CrudGallery />,
         },
         {
-          path: 'crud_projects',     // /admin/crud_projects
+          path: 'crud-projects',
           element: <CrudProject />,
         },
       ],

@@ -1,7 +1,9 @@
 .admin-container {
   display: flex;
   flex-direction: column;
+  gap: 12px;
   height: 100vh;
+  background-color: #e0e0e0;
 }
 
 .admin-outlet {
@@ -10,4 +12,6 @@
   width: 100%;
   overflow: hidden;
   height: calc(100% - 56px);
+  background-color: white;
+  border-radius: 16px;
 }

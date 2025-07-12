@@ -17,7 +17,7 @@ const AdminHeader = () => {
 
     return (
         <div className="admin-header-wrapper">
-            <div className="admin-profile" onClick={() => navigate("/")}>
+            <div className="admin-profile">
                 <img src="/assets/logo.jpg" alt="Logo" width={30} />
                 <div className="admin-name">Manish More</div>
             </div>
