@@ -42,7 +42,7 @@ const CrudVideo = () => {
 
             }
             <Toast ref={toastRef} />
-            video
+            videos
         </div>
     )
 }
