@@ -6,10 +6,10 @@ const Admin = () => {
     const adminSettings = [
         {
             id: 1,
-            title: "Audio",
-            description: "Upload, update, and delete audio tracks for the portfolio.",
-            icon: "/assets/icons/admin_audio.png",
-            link: "crud-audio",
+            title: "Projects",
+            description: "Add, update, and delete project entries and details.",
+            icon: "/assets/icons/admin_image.png",
+            link: "crud_projects",
         },
         {
             id: 2,
@@ -20,21 +20,20 @@ const Admin = () => {
         },
         {
             id: 3,
+            title: "Audio",
+            description: "Upload, update, and delete audio tracks for the portfolio.",
+            icon: "/assets/icons/admin_audio.png",
+            link: "crud_audio",
+        },
+        {
+            id: 4,
             title: "Gallery",
             description: "Upload, update, and delete image galleries and photos.",
             icon: "/assets/icons/admin_gallery.png",
             link: "crud-gallery",
         },
-        {
-            id: 4,
-            title: "Projects",
-            description: "Add, update, and delete project entries and details.",
-            icon: "/assets/icons/admin_image.png",
-            link: "crud-projects",
-        },
+
     ]
-
-
 
     return (
         <div className='admin-panel-wrapper'>

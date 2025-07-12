@@ -69,3 +69,10 @@
   line-height: 16px;
   letter-spacing: -0.06px;
 }
+
+
+@media screen and (max-width: 600px) {
+  .admin-settings-section {
+    flex-direction: column;
+  }
+}
