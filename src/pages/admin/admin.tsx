@@ -23,7 +23,7 @@ const Admin = () => {
             title: "Audio",
             description: "Upload, update, and delete audio tracks for the portfolio.",
             icon: "/assets/icons/admin_audio.png",
-            link: "crud_audio",
+            link: "crud-audio",
         },
         {
             id: 4,
