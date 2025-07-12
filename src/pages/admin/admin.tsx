@@ -9,7 +9,7 @@ const Admin = () => {
             title: "Projects",
             description: "Add, update, and delete project entries and details.",
             icon: "/assets/icons/admin_image.png",
-            link: "crud_projects",
+            link: "crud-projects",
         },
         {
             id: 2,
