@@ -15,7 +15,7 @@ const LogoutModal = ({ onClose, onConfirmLogout }: LogoutModalProps) => {
             isOverlayClickable={true}
         >
             <div className='logout-modal'>
-                <div className='logout-question'>Are you sure you want to log out?</div>
+                <div className='modal-heading'>Are you sure you want to log out?</div>
                 <div className='logout-buttons'>
                     <div className='cancel-button' onClick={onClose}>Cancel</div>
                     <div className='confirm-button' onClick={onConfirmLogout}>Logout</div>

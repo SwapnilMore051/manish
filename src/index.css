@@ -1,8 +1,56 @@
-@import './assets/fonts/Inter/stylesheet.css';
+@import "./assets/fonts/Inter/stylesheet.css";
 
 body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.primary-button {
+  display: flex;
+  gap: 8px;
+  cursor: pointer;
+  align-items: center;
+  background-color: rgb(61, 191, 234);
+  border: 1px solid lightblue;
+  border-radius: 256px;
+  padding: 12px;
+
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: -0.07px;
+
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+}
+
+.secondary-button {
+  display: flex;
+  gap: 12px;
+  cursor: pointer;
+  border: 1px solid rgb(0, 106, 141);
+  border-radius: 256px;
+  padding: 12px;
+  background-color: white;
+  color: rgb(61, 191, 234);
+
+  &:hover {
+    background: rgb(241, 241, 241);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+}
+
+.modal-heading {
+  font-weight: 900;
+  text-transform: none;
+  font-size: 24px;
+  letter-spacing: -0.72px;
+  line-height: 1.1666666667;
+  color: var(--grey-100);
 }

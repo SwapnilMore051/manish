@@ -1,0 +1,64 @@
+@use '../../styles/mixins/text' as txtMixins;
+
+.search-container {
+    display: flex;
+    width: 100%;
+    border-radius: 24px;
+    background-color: var(--grey-20);
+    padding: 8px 12px;
+    height: 32px;
+
+    &.disabled {
+        opacity: 0.3;
+        pointer-events: none;
+    }
+
+    &.header {
+        background-color: var(--primary-60);
+        color: var(--white);
+    }
+
+    &.common {
+        color: var(--grey-80);
+        border: 1px solid var(--grey-80);
+    }
+
+    .search-icon {
+        width: 24px;
+        margin-right: 8px;
+
+        &.small {
+            width: 16px;
+        }
+    }
+
+    .cross-icon {
+        cursor: pointer;
+        width: 24px;
+        margin-left: 8px;
+        filter: var(--filter-grey-100);
+
+        &.small {
+            width: 16px;
+        }
+    }
+
+    .search-input {
+        flex: 1;
+        background-color: transparent;
+        border: 0;
+        width: 100%;
+        color: inherit;
+        padding: 0;
+        @include txtMixins.applyTextStyle('text-body-s');
+
+        &::placeholder {
+            color: inherit;
+            opacity: 0.5;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

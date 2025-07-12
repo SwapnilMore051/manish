@@ -1,0 +1,1 @@
+export const Errors={email:{required:"Email is required",pattern:"Enter a valid email address"},password:{required:"Password is required",pattern:"Password should have minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number and 1 Special character",notequal:"New Password and Confirm Password should be same"}};
