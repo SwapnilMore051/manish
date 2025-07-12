@@ -1,0 +1,55 @@
+.admin-header-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: lightblue;
+  align-items: center;
+}
+
+.admin-logout {
+  display: flex;
+  gap: 12px;
+  cursor: pointer;
+  border: 1px solid rgb(0, 106, 141);
+  border-radius: 256px;
+  padding: 12px;
+  background-color: white;
+
+  &:hover {
+    background: rgb(241, 241, 241);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+}
+
+.admin-title {
+  color: rgb(0, 0, 0);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+}
+
+.logout {
+  color: #141414;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.07px;
+}
+
+.admin-profile {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+
+  .admin-name {
+    font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 600px) {
+    .logout{
+        display: none;
+    }
+}

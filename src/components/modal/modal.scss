@@ -1,0 +1,33 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1015;
+  background-color: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(2.5px);
+}
+
+.modal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1015;
+  display: flex;
+  background-color: var(--white);
+  min-height: 100px;
+  min-width: 100px;
+  width: max-content;
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: var(--xl-border-radius);
+}
+
+.modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  cursor: pointer;
+  filter: var(--filter-grey-100);
+}

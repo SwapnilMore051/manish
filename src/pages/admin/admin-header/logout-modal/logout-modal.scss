@@ -1,0 +1,44 @@
+.logout-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  width: 400px;
+  background-color: white;
+  padding: 24px;
+  border-radius: 32px;
+}
+
+.logout-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: end;
+}
+
+.cancel-button,
+.confirm-button {
+  cursor: pointer;
+  border: 1px solid lightblue;
+  border-radius: 256px;
+  padding: 12px;
+  background-color: white;
+
+  &:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+}
+
+.confirm-button {
+  background-color: rgb(146, 215, 238);
+  color: white;
+}
+
+.logout-question {
+  font-weight: 900;
+  text-transform: none;
+  font-size: 1.5rem;
+  letter-spacing: -0.72px;
+  line-height: 1.1666666667;
+  color: var(--grey-100);
+
+}

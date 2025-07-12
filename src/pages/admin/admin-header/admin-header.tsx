@@ -1,22 +1,38 @@
 import { useNavigate } from "react-router-dom";
+import './admin-header.scss'
+import LogoutModal from "./logout-modal/logout-modal";
+import { useState } from "react";
 
 const AdminHeader = () => {
+    const [logoutModal, setLogoutModal] = useState(false);
     const navigate = useNavigate();
 
+    const onLogoutToggle = () => setLogoutModal(true);
+    const onCloseLogoutModal = () => setLogoutModal(false);
+
+    const onLogoutClick = () => {
+        console.log("Logging out...");
+        navigate('/');
+    };
+
     return (
-        <div>
-            <div className="profile" onClick={() => navigate("/")}>
+        <div className="admin-header-wrapper">
+            <div className="admin-profile" onClick={() => navigate("/")}>
                 <img src="/assets/logo.jpg" alt="Logo" width={30} />
-                <div className="artist-name">Manish More</div>
-                <div className="artist-title">
-                    Foley Artist / Assistant recordist / Boom Operator
-                </div>
+                <div className="admin-name">Manish More</div>
             </div>
-            <div>Admin Panel</div>
-            <div>
+            <div className="admin-title">Admin Panel</div>
+            <div className="admin-logout" onClick={onLogoutToggle}>
                 <img src="/assets/icons/logout.svg" alt="" />
-                <div>Logout</div>
+                <div className="logout">Logout</div>
             </div>
+
+            {logoutModal &&
+                <LogoutModal
+                    onClose={onCloseLogoutModal}
+                    onConfirmLogout={onLogoutClick}
+                />
+            }
         </div>
     );
 }
