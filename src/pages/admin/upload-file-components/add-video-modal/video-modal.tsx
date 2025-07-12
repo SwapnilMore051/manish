@@ -1,6 +1,8 @@
 import Input from "../../../../components/inputs/input"
 import './video-modal.scss'
-const VideoModal = () => {
+const VideoModal = ({ onClose, onSubmit }: any) => {
+
+
     return (
         <div className="video-modal-wrapper">
             <div className="modal-heading">Upload Video</div>
@@ -11,8 +13,8 @@ const VideoModal = () => {
             </div>
 
             <div className="video-modal-buttons">
-                <div className="secondary-button">Cancel</div>
-                <div className="primary-button">Submit</div>
+                <div className="secondary-button" onClick={onClose}>Cancel</div>
+                <div className="primary-button" onClick={onSubmit}>Submit</div>
             </div>
         </div>
     )
