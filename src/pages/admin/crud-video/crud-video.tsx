@@ -42,7 +42,8 @@ const CrudVideo = () => {
 
             }
             <Toast ref={toastRef} />
-            videos
+            {/* Videos will come from backend or database here */}
+            {/* Videos Component */}
         </div>
     )
 }

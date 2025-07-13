@@ -35,7 +35,7 @@ const Input = forwardRef<
                 >
                     {errortext && (
                         <div className="input-error">
-                            <img src={'/icons/ic_error_colored.svg'} />
+                            <img src={'/assets/icons/ic_error_colored.svg'} />
                             {errortext}
                         </div>
                     )}

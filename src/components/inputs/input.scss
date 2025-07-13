@@ -61,7 +61,10 @@
 
     .input-count-text {
       color: var(--grey-70);
-      // @include txtMixins.applyTextStyle('text-body-xxs');
+      font-weight: 500;
+      font-size: 0.75rem;
+      letter-spacing: -0.06px;
+      line-height: 1.3333333333333333;
     }
   }
 
@@ -72,7 +75,10 @@
     top: calc(100% + 4px);
     display: flex;
     align-items: center;
-    // @include txtMixins.applyTextStyle('text-body-xxs');
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: -0.06px;
+    line-height: 1.3333333333333333;
 
     img {
       margin-right: 4px;
