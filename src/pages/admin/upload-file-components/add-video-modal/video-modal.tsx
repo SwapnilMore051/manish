@@ -2,7 +2,7 @@ import { useState } from "react";
 import Input from "../../../../components/inputs/input"
 import './video-modal.scss'
 
-const VideoModal = ({ onClose, onSubmit }: any) => {
+const VideoModal = ({ onClose, onSubmit, heading }: any) => {
     const [url, setUrl] = useState({
         value: '',
         touched: false,
@@ -18,7 +18,6 @@ const VideoModal = ({ onClose, onSubmit }: any) => {
 
     const validateUrl = (value: string) => {
         if (!value.trim()) return 'Video URL is required';
-        // You can add more URL validation here if needed.
         return '';
     }
 
@@ -77,7 +76,7 @@ const VideoModal = ({ onClose, onSubmit }: any) => {
 
     return (
         <div className="video-modal-wrapper">
-            <div className="modal-heading">Upload Video</div>
+            <div className="modal-heading">{heading} Video</div>
 
             <div className="video-modal-inputs">
                 <Input
