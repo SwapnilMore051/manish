@@ -59,7 +59,7 @@ const CrudVideo = () => {
                     onClose={onModalClose}
                 >
 
-                    <VideoModal heading="Add Video" onClose={onModalClose} onSubmit={onSubmit} />
+                    <VideoModal heading="Upload" onClose={onModalClose} onSubmit={onSubmit} />
 
                 </Modal>
 
@@ -105,7 +105,7 @@ const CrudVideo = () => {
                     onClose={onEditModalClose}
                 >
 
-                    <VideoModal onClose={onEditModalClose} onSubmit={onSubmit} />
+                    <VideoModal heading="Edit" onClose={onEditModalClose} onSubmit={onSubmit} />
 
                 </Modal>}
 
