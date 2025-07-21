@@ -1,4 +1,25 @@
-.crud-video-wrapper{
+.crud-video-wrapper {
+  width: 100%;
+  padding: 0 20px;
+}
+
+// css for table
+.crud-action-icons {
+  width: 24px;
+  cursor: pointer;
+}
+
+.crud-video-actions{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.crud-video-sample{
+    width: 200px;
+    height: 200px;
+}
+
+.main-table{
     width: 100%;
-    padding: 0 20px;
 }

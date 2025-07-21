@@ -5,11 +5,16 @@ import VideoModal from '../upload-file-components/add-video-modal/video-modal';
 import Modal from '../../../components/modal/modal';
 import type { ToastRefType } from '../../../components/models/toast';
 import Toast from '../../../components/toast/toast';
+import ConfirmationModal from '../../../components/confirmation-modal/confirmation-modal';
 
 const CrudVideo = () => {
 
     const [uploadVideo, setUploadVideo] = useState(false);
+    const [editVideo, setEditVideo] = useState(false);
+    const [deleteVideoModal, setDeleteVideoModal] = useState(false);
+
     const onModalClose = () => setUploadVideo(false);
+    const onEditModalClose = () => setEditVideo(false);
     const showUploadVideo = () => setUploadVideo(true);
 
     const toastRef = useRef<ToastRefType>(null);
@@ -19,8 +24,25 @@ const CrudVideo = () => {
     const onSubmit = () => {
         showToast({ type: "success", message: "Video Uploaded successfully!" });
         setUploadVideo(false)
-
     }
+
+    const editVideoModal = () => {
+        setEditVideo(true);
+    }
+
+    const deleteVideo = () => {
+        setDeleteVideoModal(true);
+    }
+
+    const onConfirmDelete = () => {
+        showToast({ type: "success", message: "Video deleted successfully!" });
+        setDeleteVideoModal(false);
+    }
+
+    const onConfirmCancel = () => {
+        setDeleteVideoModal(false);
+    }
+
     return (
         <div className='crud-video-wrapper'>
 
@@ -43,6 +65,71 @@ const CrudVideo = () => {
             }
             <Toast ref={toastRef} />
             {/* Videos will come from backend or database here */}
+            <table className='main-table'>
+                <thead>
+                    <tr>
+                        <th>Video</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <iframe
+                                className='crud-video-sample'
+                                src="https://www.youtube.com/embed/Ls02w5BTWFY"
+                                title="YouTube video player"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            ></iframe>
+                        </td>
+                        <td className='video-description'>
+                            {/* <div className='video-description'> */}
+                            <div className='video-description'>Foley work from Kichadi Bhat short film</div>
+                            {/* </div> */}
+                        </td>
+
+                        <td className='crud-video-actions'>
+                            <img className='crud-action-icons' src="/assets/icons/ic_edit_pen_grey.svg" alt="Edit" onClick={editVideoModal} />
+                            <img className='crud-action-icons' src="/assets/icons/trash.svg" alt="Delete" onClick={deleteVideo} />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            {editVideo &&
+                <Modal
+                    isOverlayVisible={true}
+                    isCloseAvailable={true}
+                    onClose={onEditModalClose}
+                >
+
+                    <VideoModal onClose={onEditModalClose} onSubmit={onSubmit} />
+
+                </Modal>}
+
+            {deleteVideoModal &&
+                <ConfirmationModal
+                    closeModalCb={() => setDeleteVideoModal(false)}
+                    modalData={{
+                        title: "Delete Video",
+                        description: "Are you sure you want to delete this video?"
+                    }}
+                    footerButtons={[
+                        {
+                            name: "Cancel",
+                            type: "secondary-button",
+                            clickAction: onConfirmCancel
+                        },
+                        {
+                            name: "Delete",
+                            type: "primary-button",
+                            clickAction: onConfirmDelete
+                        }
+                    ]}
+                />
+            }
             {/* Videos Component */}
         </div>
     )
