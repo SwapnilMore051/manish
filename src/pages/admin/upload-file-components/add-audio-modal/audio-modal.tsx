@@ -116,7 +116,7 @@ const AudioModal = ({ heading, onClose, onSubmit }: any) => {
             <div className='video-modal-inputs'>
                 <Input placeholder='Enter Image link' label='Cover Image Link' onChange={onImageChange} onBlur={onImageBlur} value={image.value} />
                 <Input placeholder='Enter Audio link' label='Audio Link' onChange={onAudioChange} onBlur={onAudioBlur} value={audio.value} />
-                <Input placeholder='Enter Description' label='Description' onChange={onDescriptionChange} onBlur={onDescriptionBlur} value={description.value} />
+                <Input component='Textarea' placeholder='Enter Description' label='Description' onChange={onDescriptionChange} onBlur={onDescriptionBlur} value={description.value} />
             </div>
             <div className="video-modal-buttons">
                 <div className="secondary-button" onClick={onClose}>Cancel</div>
