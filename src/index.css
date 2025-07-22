@@ -7,7 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* button css */
+
 .primary-button {
+  width: max-content;
   display: flex;
   gap: 8px;
   cursor: pointer;
@@ -30,6 +33,7 @@ body {
 }
 
 .secondary-button {
+  width: max-content;
   display: flex;
   gap: 12px;
   cursor: pointer;
@@ -55,7 +59,38 @@ body {
   color: var(--grey-100);
 }
 
-.disabled{
+.disabled {
   opacity: 0.3;
   pointer-events: none;
 }
+
+/* Modal scss */
+
+.video-modal-wrapper {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 20px;
+}
+
+.video-modal-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.video-modal-buttons {
+  display: flex;
+  gap: 8px;
+  align-self: end;
+}
+
+@media screen and (max-width: 600px) {
+  .video-modal-wrapper {
+    width: 300px;
+  }
+}
+
+
