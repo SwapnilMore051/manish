@@ -98,8 +98,8 @@ const CrudProject = () => {
                 <ConfirmationModal
                     closeModalCb={() => setDeleteProjectModal(false)}
                     modalData={{
-                        title: "Delete Video",
-                        description: "Are you sure you want to delete this video?"
+                        title: "Delete Project",
+                        description: "Are you sure you want to delete this project?"
                     }}
                     footerButtons={[
                         {
