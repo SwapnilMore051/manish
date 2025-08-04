@@ -99,6 +99,13 @@ const About = () => {
         "Assisted in recording and managing audio for WOT MUZIC’s podcast featuring the devotional track ‘Avtarla Sai.’ Responsibilities included setting up and monitoring recording equipment, ensuring clear and high-quality sound capture, and supporting the post-production team to maintain professional audio standards.",
       link: "https://youtu.be/JovBSduu22w?si=MfCmtYOWyVpZN1R4",
     },
+    {
+      project: "Kaka Halwai",
+      cover_image: "/assets/icons/kaka_halwai.jpg",
+      description:
+        "I worked as a Boom Operator for the advertisement of 'Kaka Halwai,' where I was responsible for capturing high-quality on-set audio, ensuring clear dialogue and ambient sound to support the production’s overall sound design.",
+      link: "https://www.instagram.com/reel/DMzghvJRCcg/?igsh=cGpxbGxsc3AwYXN5",
+    },
   ];
 
   return (
