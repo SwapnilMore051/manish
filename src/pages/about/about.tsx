@@ -104,7 +104,6 @@ const About = () => {
       cover_image: "/assets/icons/kaka_halwai.jpg",
       description:
         "I worked as a Boom Operator for the advertisement of 'Kaka Halwai,' where I was responsible for capturing high-quality on-set audio, ensuring clear dialogue and ambient sound to support the production’s overall sound design.",
-      link: "https://www.instagram.com/reel/DMzghvJRCcg/?igsh=cGpxbGxsc3AwYXN5",
     },
   ];
 
