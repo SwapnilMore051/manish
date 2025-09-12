@@ -1,15 +1,23 @@
 import { useState } from "react";
 import "./about.scss";
+import Modal from "../../components/modal/modal";
 
 const About = () => {
-  const [expandedDescriptions, setExpandedDescriptions] = useState<number[]>(
-    []
-  );
+  const [expandedDescriptions, setExpandedDescriptions] = useState<number[]>([]);
+  const [selectedCoverImage, setSelectedCoverImage] = useState<string | null>(null);
 
   const toggleDescription = (index: number) => {
     setExpandedDescriptions((prev) =>
       prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
+  };
+
+  const onProjectImageClick = (coverImage: string) => {
+    setSelectedCoverImage(coverImage);
+  };
+
+  const closeProjectCover = () => {
+    setSelectedCoverImage(null);
   };
 
   const projects = [
@@ -34,13 +42,13 @@ const About = () => {
     },
     {
       project: "Sakhrrech Zaad",
-      cover_image: "/assets/icons/sakhrrech-zaad.jpg",
+      cover_image: "",
       description:
         "Sakhrech Zaad was marathi short film, which was made for Film Festival.",
     },
     {
       project: "Mrudgandha",
-      cover_image: "/assets/icons/mrudgandha.jpg",
+      cover_image: "",
       description:
         "A marathi short film for film festival. I worked as Foley Artist.",
     },
@@ -143,6 +151,7 @@ const About = () => {
                 className="project-cover-image"
                 src={project.cover_image}
                 alt={project.project}
+                onClick={() => onProjectImageClick(project.cover_image)}
               />
               <div className="project-name-description">
                 <div className="project-name-link">
@@ -150,7 +159,6 @@ const About = () => {
                   {project.link && (
                     <img
                       src="/assets/icons/hyperlink.svg"
-                      // src="/assets/icons/youtube.svg"
                       alt="link"
                       width={24}
                       style={{ cursor: "pointer" }}
@@ -178,6 +186,18 @@ const About = () => {
           );
         })}
       </div>
+
+      {/* Modal that shows selected image */}
+      {selectedCoverImage && (
+        <Modal
+          isOverlayClickable={true}
+          isOverlayVisible={true}
+          isCloseAvailable={true}
+          onClose={closeProjectCover}
+        >
+          <img src={selectedCoverImage} alt="Project Cover" className="modal-project-image" />
+        </Modal>
+      )}
     </div>
   );
 };
