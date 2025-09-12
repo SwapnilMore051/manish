@@ -11,10 +11,10 @@ const BehindTheScene = () => {
     { type: "image", src: "bts5.jpg" },
     { type: "image", src: "bts3.jpg" },
     { type: "image", src: "bts6.jpeg" },
-    // {
-    //   type: "image",
-    //   src: "https://drive.google.com/thumbnail?id=1B_Li1zb6eZVkh6pgBK9yasRpuyeUC5Xx"
-    // },
+    {
+      type: "image",
+      src: "https://drive.google.com/thumbnail?id=1B_Li1zb6eZVkh6pgBK9yasRpuyeUC5Xx"
+    },
     { type: "video", src: "manish_vid1.mp4" },
     { type: "video", src: "manish_vid2.mp4" },
   ];
