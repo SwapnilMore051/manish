@@ -11,6 +11,10 @@ const BehindTheScene = () => {
     { type: "image", src: "bts5.jpg" },
     { type: "image", src: "bts3.jpg" },
     { type: "image", src: "bts6.jpeg" },
+    // {
+    //   type: "image",
+    //   src: "https://drive.google.com/thumbnail?id=1B_Li1zb6eZVkh6pgBK9yasRpuyeUC5Xx"
+    // },
     { type: "video", src: "manish_vid1.mp4" },
     { type: "video", src: "manish_vid2.mp4" },
   ];
@@ -51,15 +55,23 @@ const BehindTheScene = () => {
 
   return (
     <div className="bts-wrapper">
-      <div className="title">Gallery    </div>
+      <div className="title">Gallery</div>
 
       <div className="bts-media-container">
         {btsMedia.map((media, index) => (
-          <div className="bts-img-vid-wrapper" key={index} onClick={() => handleMediaClick(index)}>
+          <div
+            className="bts-img-vid-wrapper"
+            key={index}
+            onClick={() => handleMediaClick(index)}
+          >
             {media.type === "image" ? (
               <img
                 className="bts-image"
-                src={`/assets/icons/${media.src}`}
+                src={
+                  media.src.startsWith("http")
+                    ? media.src
+                    : `/assets/icons/${media.src}`
+                }
                 alt="behind the scene"
               />
             ) : (
@@ -81,7 +93,11 @@ const BehindTheScene = () => {
             {btsMedia[selectedIndex].type === "image" ? (
               <img
                 className="modal-image"
-                src={`/assets/icons/${btsMedia[selectedIndex].src}`}
+                src={
+                  btsMedia[selectedIndex].src.startsWith("http")
+                    ? btsMedia[selectedIndex].src
+                    : `/assets/icons/${btsMedia[selectedIndex].src}`
+                }
                 alt="Full size"
               />
             ) : (
