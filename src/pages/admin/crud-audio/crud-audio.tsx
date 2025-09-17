@@ -7,6 +7,12 @@ import type { ToastRefType } from '../../../components/models/toast';
 import Toast from '../../../components/toast/toast';
 import ConfirmationModal from '../../../components/confirmation-modal/confirmation-modal';
 
+type AudioFormData = {
+    image: string;
+    audio: string;
+    description: string;
+};
+
 const CrudAudio = () => {
 
     const [audioModal, setAudioModal] = useState(false);
@@ -20,10 +26,7 @@ const CrudAudio = () => {
     const showToast = ({ type, message }: any) => {
         toastRef?.current?.showToast({ type, message });
     };
-    const onSubmit = () => {
-        setAudioModal(false);
-        showToast({ type: "success", message: "Audio Uploaded successfully!" });
-    }
+
 
     const openEditAudioModal = () => setEditAudioModal(true);
     const closeEditAudioModal = () => setEditAudioModal(false);
@@ -39,6 +42,28 @@ const CrudAudio = () => {
         setDeleteAudioModal(false);
         showToast({ type: "success", message: "Audio deleted successfully!" });
     }
+
+    const handleAudioFormSubmit = async (data: AudioFormData) => {
+        try {
+            const response = await fetch('https://script.google.com/macros/s/AKfycbysateUpZwLdcDouEzZwDn3RNbGreA4DkvtLtkLXa2Y_fO0EW7lWlDcaxn5PvAPAXVK/exec', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (result.status === 'success') {
+                showToast({ type: 'success', message: 'Audio uploaded successfully!' });
+                setAudioModal(false);
+            } else {
+                showToast({ type: 'error', message: 'Failed to save data.' });
+            }
+        } catch (err) {
+            console.error(err);
+            showToast({ type: 'error', message: 'Error saving data.' });
+        }
+    };
 
 
     return (
@@ -80,14 +105,14 @@ const CrudAudio = () => {
             {/* Modals */}
             {editAudioModal &&
                 <Modal isCloseAvailable={true} isOverlayClickable={true} isOverlayVisible={true} onClose={closeEditAudioModal}>
-                    <AudioModal heading="Edit Audio" onClose={closeEditAudioModal} />
+                    <AudioModal heading="Edit Audio" onClose={() => setEditAudioModal(false)} onSubmit={handleAudioFormSubmit} />
                 </Modal>
             }
 
 
             {audioModal &&
                 <Modal isCloseAvailable={true} isOverlayClickable={true} isOverlayVisible={true} onClose={closeAudioModal}>
-                    <AudioModal heading="Add Audio" onClose={closeAudioModal} onSubmit={onSubmit} />
+                    <AudioModal heading="Add Audio" onClose={() => setAudioModal(false)} onSubmit={handleAudioFormSubmit} />
                 </Modal>
             }
 

@@ -2,7 +2,21 @@ import { useState } from 'react';
 import Input from '../../../../components/inputs/input'
 import './audio-modal.scss'
 
-const AudioModal = ({ heading, onClose, onSubmit }: any) => {
+
+
+type AudioFormData = {
+    image: string;
+    audio: string;
+    description: string;
+};
+
+interface AudioModalProps {
+    heading: string;
+    onClose: () => void;
+    onSubmit: (data: AudioFormData) => void;
+}
+
+const AudioModal = ({ heading, onClose, onSubmit }: AudioModalProps) => {
     const [image, setImage] = useState({
         value: '',
         touched: false,
@@ -108,8 +122,16 @@ const AudioModal = ({ heading, onClose, onSubmit }: any) => {
         });
     }
 
-
     const isFormValid = image.isValid && audio.isValid && description.isValid;
+
+    const handleSubmit = () => {
+        if (!isFormValid) return;
+        onSubmit({
+            image: image.value,
+            audio: audio.value,
+            description: description.value,
+        });
+    };
     return (
         <div className='video-modal-wrapper'>
             <div className='modal-heading'>{heading}</div>
@@ -122,7 +144,7 @@ const AudioModal = ({ heading, onClose, onSubmit }: any) => {
                 <div className="secondary-button" onClick={onClose}>Cancel</div>
                 <button
                     className={`primary-button ${!isFormValid ? 'disabled' : ''}`}
-                    onClick={onSubmit}
+                    onClick={handleSubmit}
                     disabled={!isFormValid}
                 >
                     Submit
