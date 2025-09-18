@@ -3,7 +3,6 @@ import Input from '../../../../components/inputs/input'
 import './gallery-modal.scss'
 
 const GalleryModal = ({ heading, onClose, onSubmit }: any) => {
-    const [url, setUrl] = useState([])
 
     return (
         <div className='video-modal-wrapper'>
