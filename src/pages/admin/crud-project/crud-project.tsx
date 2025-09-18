@@ -1,49 +1,88 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
+import axios from 'axios';
 import Modal from '../../../components/modal/modal';
 import CrudHeader from '../crud-header/crud-header';
 import ProjectModal from '../upload-file-components/add-project-modal/project-modal';
-import './crud-project.scss'
+import './crud-project.scss';
 import type { ToastRefType } from '../../../components/models/toast';
 import Toast from '../../../components/toast/toast';
 import ConfirmationModal from '../../../components/confirmation-modal/confirmation-modal';
+import API from '../../../api/endpoints';
 
 const CrudProject = () => {
-
-    const [projectModal, setProjectModal] = useState(false);
-    const [editProjectModal, setEditProjectModal] = useState(false);
-    const [deleteProjectModal, setDeleteProjectModal] = useState(false);
-    const openProjectModal = () => setProjectModal(true);
+    const [projects, setProjects] = useState<any[]>([]);
+    const [activeModal, setActiveModal] = useState<'add' | 'edit' | null>(null);
+    const [editProject, setEditProject] = useState<any | null>(null);
+    const [deleteProject, setDeleteProject] = useState<any | null>(null);
     const toastRef = useRef<ToastRefType>(null);
 
     const showToast = ({ type, message }: any) => {
         toastRef?.current?.showToast({ type, message });
     };
-    const onSubmit = () => {
-        setProjectModal(false);
-        showToast({ type: "success", message: "Project Uploaded successfully!" })
+
+    // Fetch projects on mount
+    useEffect(() => {
+        fetchProjects();
+    }, []);
+
+    const fetchProjects = async () => {
+        try {
+            const res = await axios.get(API.PROJECTS.GET_ALL);
+            setProjects(res.data.data);
+        } catch (err) {
+            console.error(err);
+            showToast({ type: 'error', message: 'Failed to fetch projects' });
+        }
     };
 
-    const onEditModalClose = () => setEditProjectModal(false);
-    const editVideoModal = () => {
-        setEditProjectModal(true);
-    }
+    // Add Modal
+    const openAddProjectModal = () => setActiveModal('add');
 
-    const onConfirmCancel = () => {
-        setDeleteProjectModal(false);
-    }
+    // Edit Modal
+    const openEditProjectModal = (project: any) => {
+        setEditProject(project);
+        setActiveModal('edit');
+    };
 
-    const onConfirmDelete = () => {
-        setDeleteProjectModal(false);
-        showToast({ type: "success", message: "Project deleted successfully!" });
-    }
+    const closeModal = () => {
+        setActiveModal(null);
+        setEditProject(null);
+        setDeleteProject(null);
+    };
 
-    const onOpenDeleteModal = () => {
-        setDeleteProjectModal(true);
-    }
+    // Add / Edit Project
+    const handleSubmit = async (
+        data: { name: string; description: string; link: string; cover_image: string },
+        projectId?: string
+    ) => {
+        try {
+            if (projectId) {
+                await axios.put(API.PROJECTS.UPDATE(projectId), data);
+                showToast({ type: 'success', message: 'Project updated successfully!' });
+            } else {
+                await axios.post(API.PROJECTS.CREATE, data);
+                showToast({ type: 'success', message: 'Project added successfully!' });
+            }
+            closeModal();
+            fetchProjects();
+        } catch (err) {
+            console.error(err);
+            showToast({ type: 'error', message: 'Something went wrong!' });
+        }
+    };
 
-
-    const closeProjectModal = () => setProjectModal(false);
-
+    // Delete project
+    const handleDelete = async (projectId: string) => {
+        try {
+            await axios.delete(API.PROJECTS.DELETE(projectId));
+            showToast({ type: 'success', message: 'Project deleted successfully!' });
+            closeModal();
+            fetchProjects();
+        } catch (err) {
+            console.error(err);
+            showToast({ type: 'error', message: 'Failed to delete project' });
+        }
+    };
 
     return (
         <div className='crud-project-wrapper'>
@@ -52,72 +91,89 @@ const CrudProject = () => {
             <CrudHeader
                 title="Upload or update project"
                 fileType="Add Project"
-                onClick={openProjectModal} />
+                onClick={openAddProjectModal}
+            />
 
-            <div>
-                <div className='table'>
-                    <div className='table-header'>
-                        <div className='table-row'>
-                            <div className="table-cell">Project Name</div>
-                            <div className="table-cell">Description</div>
-                            <div className="table-cell">Actions</div>
-                        </div>
+            {/* Projects Table */}
+            <div className='table'>
+                <div className='table-header'>
+                    <div className='table-row'>
+                        <div className="table-cell">Project Name</div>
+                        <div className="table-cell">Description</div>
+                        <div className="table-cell">Link</div>
+                        <div className="table-cell">Actions</div>
                     </div>
-                    <div className='table-body'>
-                        <div className='table-row'>
-                            <div className="table-cell">Alyad Palyad</div>
-                            <div className="table-cell">Foley work sample from Alyad Palyad movie</div>
+                </div>
+                <div className='table-body'>
+                    {projects.map((project) => (
+                        <div className='table-row' key={project._id}>
+                            <div className="table-cell">{project.name}</div>
+                            <div className="table-cell">{project.description}</div>
+                            <div className="table-cell">
+                                <a href={project.link} target="_blank" rel="noopener noreferrer">View</a>
+                            </div>
                             <div className="table-cell action-buttons">
-                                <img className='crud-action-icons' src="/assets/icons/ic_edit_pen_grey.svg" alt="Edit" onClick={editVideoModal} />
-                                <img className='crud-action-icons' src="/assets/icons/trash.svg" alt="Delete" onClick={onOpenDeleteModal} />
+                                <img
+                                    className='crud-action-icons'
+                                    src="/assets/icons/ic_edit_pen_grey.svg"
+                                    alt="Edit"
+                                    onClick={() => openEditProjectModal(project)}
+                                />
+                                <img
+                                    className='crud-action-icons'
+                                    src="/assets/icons/trash.svg"
+                                    alt="Delete"
+                                    onClick={() => setDeleteProject(project)}
+                                />
                             </div>
                         </div>
-                    </div>
+                    ))}
                 </div>
             </div>
 
-            {projectModal &&
-                <Modal isCloseAvailable={true} isOverlayClickable={true} isOverlayVisible={true} onClose={closeProjectModal}>
-                    <ProjectModal heading="Add Project" onClose={closeProjectModal} onSubmit={onSubmit} />
-                </Modal>
-            }
-
-
-            {editProjectModal &&
+            {/* Add / Edit Project Modal */}
+            {(activeModal === 'add' || activeModal === 'edit') && (
                 <Modal
-                    isOverlayVisible={true}
                     isCloseAvailable={true}
-                    onClose={onEditModalClose}
+                    isOverlayClickable={true}
+                    isOverlayVisible={true}
+                    onClose={closeModal}
                 >
+                    <ProjectModal
+                        heading={activeModal === 'add' ? 'Add Project' : 'Edit Project'}
+                        onClose={closeModal}
+                        onSubmit={(data: any) =>
+                            handleSubmit(data, activeModal === 'edit' ? editProject?._id : undefined)
+                        }
+                        project={editProject}
+                    />
+                </Modal>
+            )}
 
-                    <ProjectModal heading="Edit Project" onClose={onEditModalClose} onSubmit={onSubmit} />
-
-                </Modal>}
-
-            {deleteProjectModal &&
+            {/* Delete Confirmation Modal */}
+            {deleteProject && (
                 <ConfirmationModal
-                    closeModalCb={() => setDeleteProjectModal(false)}
+                    closeModalCb={closeModal}
                     modalData={{
                         title: "Delete Project",
-                        description: "Are you sure you want to delete this project?"
+                        description: `Are you sure you want to delete "${deleteProject.name}"?`
                     }}
                     footerButtons={[
                         {
                             name: "Cancel",
                             type: "secondary-button",
-                            clickAction: onConfirmCancel
+                            clickAction: closeModal
                         },
                         {
                             name: "Delete",
                             type: "primary-button",
-                            clickAction: onConfirmDelete
+                            clickAction: () => handleDelete(deleteProject._id)
                         }
                     ]}
                 />
-            }
-
+            )}
         </div>
-    )
-}
+    );
+};
 
-export default CrudProject
+export default CrudProject;
