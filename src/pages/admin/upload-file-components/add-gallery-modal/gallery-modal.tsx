@@ -1,4 +1,4 @@
-import { useState } from 'react'
+
 import Input from '../../../../components/inputs/input'
 import './gallery-modal.scss'
 
