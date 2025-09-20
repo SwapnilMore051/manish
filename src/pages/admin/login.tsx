@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import EmailInput from "../components/Email-input";
-import PasswordInput from "../components/Password-input";
+import EmailInput from "../../components/inputs/email-input";
+import PasswordInput from "../../components/inputs/password-input";
 import type { InputState } from "../models/input";
 
 const Login = () => {
