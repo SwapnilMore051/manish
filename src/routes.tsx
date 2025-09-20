@@ -8,6 +8,8 @@ import CrudVideo from './pages/admin/crud-video/crud-video';
 import CrudGallery from './pages/admin/crud-gallery/crud-gallery';
 import CrudProject from './pages/admin/crud-project/crud-project';
 import AdminBase from './pages/admin/admin-base/admin-base';
+import Login from './pages/admin/login';
+
 
 export const router = createBrowserRouter(
   [
