@@ -23,28 +23,28 @@ const Login = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmailState((prev) => ({
+    setEmailState((prev : any) => ({
       ...prev,
       value: e.target.value,
     }));
   };
 
   const handleEmailBlur = () => {
-    setEmailState((prev) => ({
+    setEmailState((prev : any) => ({
       ...prev,
       touched: true,
     }));
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPasswordState((prev) => ({
+    setPasswordState((prev : any) => ({
       ...prev,
       value: e.target.value,
     }));
   };
 
   const handlePasswordBlur = () => {
-    setPasswordState((prev) => ({
+    setPasswordState((prev : any) => ({
       ...prev,
       touched: true,
     }));
