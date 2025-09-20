@@ -22,19 +22,6 @@ const Login = () => {
   });
 
   const [errorMessage, setErrorMessage] = useState("");
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmailState((prev : any) => ({
-      ...prev,
-      value: e.target.value,
-    }));
-  };
-
-  const handleEmailBlur = () => {
-    setEmailState((prev : any) => ({
-      ...prev,
-      touched: true,
-    }));
-  };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPasswordState((prev : any) => ({
@@ -77,8 +64,6 @@ const Login = () => {
             customLabel="Email or Number"
             parentState={emailState}
             parentStateChanger={setEmailState}
-            onChange={handleEmailChange}
-            onBlur={handleEmailBlur}
           />
 
           <PasswordInput
