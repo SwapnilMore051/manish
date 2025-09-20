@@ -1,6 +1,6 @@
 //endpoints.ts
 
-const BASE_URL = "http://localhost:5000/api"; // Change this after hosting
+const BASE_URL = "https://vercel-node-api.onrender.com/api"; // Change this after hosting
 
 export const API = {
   PROJECTS: {
