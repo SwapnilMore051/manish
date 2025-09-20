@@ -1,0 +1,107 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import EmailInput from "../components/Email-input";
+import PasswordInput from "../components/Password-input";
+import type { InputState } from "../models/input";
+
+const Login = () => {
+  const navigate = useNavigate();
+
+  const [emailState, setEmailState] = useState<InputState>({
+    value: "",
+    touched: false,
+    error: "",
+    isValid: false,
+  });
+
+  const [passwordState, setPasswordState] = useState<InputState>({
+    value: "",
+    touched: false,
+    error: "",
+    isValid: false,
+  });
+
+  const [errorMessage, setErrorMessage] = useState("");
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmailState((prev) => ({
+      ...prev,
+      value: e.target.value,
+    }));
+  };
+
+  const handleEmailBlur = () => {
+    setEmailState((prev) => ({
+      ...prev,
+      touched: true,
+    }));
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPasswordState((prev) => ({
+      ...prev,
+      value: e.target.value,
+    }));
+  };
+
+  const handlePasswordBlur = () => {
+    setPasswordState((prev) => ({
+      ...prev,
+      touched: true,
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const validEmail = "sonyamore051@gmail.com";
+    const validNumber = "9876543210";
+    const validPassword = "pass@123";
+
+    if (
+      (emailState.value === validEmail || emailState.value === validNumber) &&
+      passwordState.value === validPassword
+    ) {
+      setErrorMessage("");
+      navigate("/admin");
+    } else {
+      setErrorMessage("Incorrect credentials");
+    }
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <div className="bg-white shadow-md rounded-2xl p-8 w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <EmailInput
+            customLabel="Email or Number"
+            parentState={emailState}
+            parentStateChanger={setEmailState}
+            onChange={handleEmailChange}
+            onBlur={handleEmailBlur}
+          />
+
+          <PasswordInput
+            value={passwordState.value}
+            errortext={passwordState.error}
+            onChange={handlePasswordChange}
+            onBlur={handlePasswordBlur}
+          />
+
+          {errorMessage && (
+            <p className="text-red-500 text-sm text-center">{errorMessage}</p>
+          )}
+
+          <button
+            type="submit"
+            className="primary-button"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
