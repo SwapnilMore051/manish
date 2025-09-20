@@ -4,13 +4,13 @@ import "./home.scss";
 const Home = () => {
 
   const navigate = useNavigate();
-  const loinNavigate = () => {
+  const loginNavigate = () => {
     navigate("/login");
 
   };
   return (
     <div className="home-wrapper">
-      <div className="main-heading" onClick={loinNavigate}>Welcome</div>
+      <div className="main-heading" onClick={loginNavigate}>Welcome</div>
       <div className="sub-heading">
         <div className="sub-titles">I bring visuals to life -</div>
         <div className="sub-titles">"Foley is my art"</div>
