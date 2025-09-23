@@ -2,16 +2,18 @@ import { useNavigate } from "react-router-dom";
 import './admin-header.scss'
 import LogoutModal from "./logout-modal/logout-modal";
 import { useState } from "react";
+import { useAuth } from "../../../context/AuthContext";
 
 const AdminHeader = () => {
     const [logoutModal, setLogoutModal] = useState(false);
     const navigate = useNavigate();
+    const { logout } = useAuth();
 
     const onLogoutToggle = () => setLogoutModal(true);
     const onCloseLogoutModal = () => setLogoutModal(false);
 
     const onLogoutClick = () => {
-        console.log("Logging out...");
+        logout();
         navigate('/');
     };
 

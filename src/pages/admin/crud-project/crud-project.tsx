@@ -110,7 +110,11 @@ const CrudProject = () => {
                             <div className="table-cell">{project.name}</div>
                             <div className="table-cell">{project.description}</div>
                             <div className="table-cell">
-                                <a href={project.link} target="_blank" rel="noopener noreferrer">View</a>
+                                {project.link == 0 ?
+                                    <>No Link</> :
+                                    <a href={project.link} target="_blank" rel="noopener noreferrer">{project.link}</a>
+                                }
+
                             </div>
                             <div className="table-cell action-buttons">
                                 <img

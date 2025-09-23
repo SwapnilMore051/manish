@@ -9,6 +9,7 @@ import CrudGallery from './pages/admin/crud-gallery/crud-gallery';
 import CrudProject from './pages/admin/crud-project/crud-project';
 import AdminBase from './pages/admin/admin-base/admin-base';
 import Login from './pages/admin/login';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 
 
 export const router = createBrowserRouter(
@@ -27,30 +28,46 @@ export const router = createBrowserRouter(
       path: '/login',
       element: <Login />,
     },
+    // {
+    //   path: '/admin',
+    //   element: <AdminBase />,
+    //   children: [
+    //     {
+    //       path: '', 
+    //       element: <Admin />,
+    //     },
+    //     {
+    //       path: 'crud-audio',
+    //       element: <CrudAudio />,
+    //     },
+    //     {
+    //       path: 'crud-video',
+    //       element: <CrudVideo />,
+    //     },
+    //     {
+    //       path: 'crud-gallery',
+    //       element: <CrudGallery />,
+    //     },
+    //     {
+    //       path: 'crud-projects',
+    //       element: <CrudProject />,
+    //     },
+    //   ],
+    // },
+
     {
-      path: '/admin',
-      element: <AdminBase />,
+      path: "/admin",
+      element: (
+        <ProtectedRoute>
+          <AdminBase />
+        </ProtectedRoute>
+      ),
       children: [
-        {
-          path: '', 
-          element: <Admin />,
-        },
-        {
-          path: 'crud-audio',
-          element: <CrudAudio />,
-        },
-        {
-          path: 'crud-video',
-          element: <CrudVideo />,
-        },
-        {
-          path: 'crud-gallery',
-          element: <CrudGallery />,
-        },
-        {
-          path: 'crud-projects',
-          element: <CrudProject />,
-        },
+        { path: "", element: <Admin /> },
+        { path: "crud-audio", element: <CrudAudio /> },
+        { path: "crud-video", element: <CrudVideo /> },
+        { path: "crud-gallery", element: <CrudGallery /> },
+        { path: "crud-projects", element: <CrudProject /> },
       ],
     },
     {

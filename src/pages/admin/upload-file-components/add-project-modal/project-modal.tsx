@@ -34,19 +34,21 @@ const ProjectModal = ({ onClose, onSubmit, heading, project }: any) => {
         setter({ value, touched: true, error, isValid: !error });
     };
 
-    const isFormValid = name.isValid && description.isValid && link.isValid && image.isValid;
+    const isFormValid = name.isValid && description.isValid 
+        // && link.isValid && image.isValid
+        ;
 
     return (
         <div className='video-modal-wrapper'>
             <div className="modal-heading">{heading}</div>
 
             <div className='video-modal-inputs'>
-                <Input label='Project Name' placeholder='Enter Project Name'
+                <Input label='Project Name *' placeholder='Enter Project Name'
                     onChange={handleChange(setName, 'Project Name')}
                     onBlur={handleBlur(setName, 'Project Name', name.value)}
                     value={name.value}
                 />
-                <Input label='Project Description' component='Textarea' placeholder='Enter Project Description'
+                <Input label='Project Description *' component='Textarea' placeholder='Enter Project Description'
                     onChange={handleChange(setDescription, 'Project Description')}
                     onBlur={handleBlur(setDescription, 'Project Description', description.value)}
                     value={description.value}
