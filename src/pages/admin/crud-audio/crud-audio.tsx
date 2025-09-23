@@ -121,6 +121,7 @@ const CrudAudio = () => {
                     <div className="table-row">
                         <div className="table-cell">Audio</div>
                         <div className="table-cell">Description</div>
+                        <div className="table-cell">Cover Image</div>
                         <div className="table-cell">Actions</div>
                     </div>
                 </div>
@@ -133,6 +134,7 @@ const CrudAudio = () => {
                                 </audio>
                             </div>
                             <div className="table-cell">{audio.description}</div>
+                            <div className="table-cell">{audio.image}</div>
                             <div className="table-cell action-buttons">
                                 <img
                                     className="crud-action-icons"
