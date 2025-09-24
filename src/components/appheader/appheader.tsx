@@ -44,7 +44,7 @@ const Appheader = () => {
         <img src="/assets/logo.jpg" alt="Logo" width={30} />
         <div className="artist-name">Manish More</div>
         <div className="artist-title">
-          Foley Artist / Assistant recordist / Boom Operator
+          Foley Artist / Sound Editor / Assistant recordist / Boom Operator
         </div>
       </div>
       <div className="menu">
