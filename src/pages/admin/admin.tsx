@@ -1,7 +1,13 @@
+import { useEffect, useRef } from 'react';
 import './admin.scss'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import type { ToastRefType } from '../../components/models/toast';
+import Toast from '../../components/toast/toast';
 
 const Admin = () => {
+
+    const location = useLocation();
+    const toastRef = useRef<ToastRefType>(null);
 
     const adminSettings = [
         {
@@ -35,8 +41,14 @@ const Admin = () => {
 
     ]
 
+    useEffect(() => {
+        if (location.state?.showToast) {
+            toastRef.current?.showToast({ type: "success", message: "Welcome Mr. Manish More" });
+        }
+    }, [location.state]);
     return (
         <div className='admin-panel-wrapper'>
+            <Toast ref={toastRef} />
             <div className='admin-settings-section'>
                 {adminSettings.map((setting, index) => (
                     <Link to={setting.link} className="admin-setting" key={index}>

@@ -10,6 +10,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
+
   const [emailState, setEmailState] = useState<InputState>({
     value: "",
     touched: false,
@@ -52,14 +53,17 @@ const Login = () => {
       (emailState.value === validEmail || emailState.value === validNumber) &&
       passwordState.value === validPassword
     ) {
-      setErrorMessage("");
       login(loginToken);
-      navigate("/admin");
+      navigate("/admin", {
+        state: { showToast: true },
+        replace: true,
+      });
+
     } else {
       setErrorMessage("Incorrect credentials");
     }
   };
-  
+
 
   return (
     <div className="main-login-wrapper">
@@ -89,11 +93,12 @@ const Login = () => {
           <button
             type="submit"
             className="primary-button max-width-100"
-             disabled={!emailState.isValid || !passwordState.value}
+            disabled={!emailState.isValid || !passwordState.value}
           >
             Login
           </button>
         </form>
+
       </div>
     </div >
   );
