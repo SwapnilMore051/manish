@@ -1,0 +1,27 @@
+@use "../styles/radio.scss" as radioMixins;
+
+.radio-input-container {
+  display: flex;
+  align-items: center;
+
+  .custom-radio {
+    @include radioMixins.custom-radio();
+  }
+
+  .radio-label {
+    font-size: 1rem;
+    color: var(--grey-100);
+    cursor: pointer;
+    line-height: 1.25rem;
+  }
+
+  &.medium {
+    .custom-radio {
+      @include radioMixins.custom-radio(24px);
+    }
+
+    .radio-label {
+      line-height: 1.5rem;
+    }
+  }
+}

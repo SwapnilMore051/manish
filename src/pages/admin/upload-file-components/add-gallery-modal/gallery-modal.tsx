@@ -1,53 +1,38 @@
 import { useState, useEffect } from 'react';
 import Input from '../../../../components/inputs/input';
+import Radio from '../../../../components/radio/radio';
 import './gallery-modal.scss';
-
-type GalleryFormData = {
-    _id?: string;
-    image: string;
-    description: string;
-};
 
 interface GalleryModalProps {
     heading: string;
     onClose: () => void;
-    onSubmit: (data: GalleryFormData) => void;
-    initialData?: GalleryFormData | null;
+    onSubmit: (data: { url: string; type: 'image' | 'video'; description: string }) => void;
+    initialData?: { url: string; type: 'image' | 'video'; description: string } | null;
 }
 
 const GalleryModal = ({ heading, onClose, onSubmit, initialData }: GalleryModalProps) => {
-    const [image, setImage] = useState({
-        value: '',
-        touched: false,
-        error: '',
-        isValid: false,
-    });
+    const [url, setUrl] = useState({ value: '', touched: false, error: '', isValid: false });
+    const [description, setDescription] = useState({ value: '', touched: false, error: '', isValid: false });
+    const [isImageChecked, setIsImageChecked] = useState(true);
+    const [isVideoChecked, setIsVideoChecked] = useState(false);
 
-    const [description, setDescription] = useState({
-        value: '',
-        touched: false,
-        error: '',
-        isValid: false,
-    });
-
-    // Prefill form on edit
+    // Prefill on edit
     useEffect(() => {
         if (initialData) {
-            setImage({ value: initialData.image, touched: true, error: '', isValid: true });
+            setUrl({ value: initialData.url, touched: true, error: '', isValid: true });
             setDescription({ value: initialData.description, touched: true, error: '', isValid: true });
+            setIsImageChecked(initialData.type === 'image');
+            setIsVideoChecked(initialData.type === 'video');
         }
     }, [initialData]);
 
-    // Validation
-    const validateImage = (value: string) => (!value.trim() ? 'Image URL is required' : '');
-    const validateDescription = (value: string) =>
-        !value.trim() ? 'Description is required' : '';
+    const validateUrl = (value: string) => (!value.trim() ? 'URL is required' : '');
+    const validateDescription = (value: string) => (!value.trim() ? 'Description is required' : '');
 
-    // Handlers
-    const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        const error = validateImage(value);
-        setImage({ value, touched: true, error, isValid: !error });
+        const error = validateUrl(value);
+        setUrl({ value, touched: true, error, isValid: !error });
     };
 
     const onDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -56,25 +41,36 @@ const GalleryModal = ({ heading, onClose, onSubmit, initialData }: GalleryModalP
         setDescription({ value, touched: true, error, isValid: !error });
     };
 
-    const onImageBlur = () =>
-        setImage((prev) => {
-            const error = validateImage(prev.value);
-            return { ...prev, touched: true, error, isValid: !error };
-        });
+    const onUrlBlur = () => {
+        setUrl(prev => ({ ...prev, touched: true, error: validateUrl(prev.value), isValid: !validateUrl(prev.value) }));
+    };
 
-    const onDescriptionBlur = () =>
-        setDescription((prev) => {
-            const error = validateDescription(prev.value);
-            return { ...prev, touched: true, error, isValid: !error };
-        });
+    const onDescriptionBlur = () => {
+        setDescription(prev => ({
+            ...prev,
+            touched: true,
+            error: validateDescription(prev.value),
+            isValid: !validateDescription(prev.value),
+        }));
+    };
 
-    const isFormValid = image.isValid && description.isValid;
+    const handleRadioSelect = (value: 'image' | 'video') => {
+        if (value === 'image') {
+            setIsImageChecked(true);
+            setIsVideoChecked(false);
+        } else {
+            setIsImageChecked(false);
+            setIsVideoChecked(true);
+        }
+    };
+
+    const isFormValid = url.isValid && description.isValid;
 
     const handleSubmit = () => {
         if (!isFormValid) return;
         onSubmit({
-            _id: initialData?._id,
-            image: image.value,
+            url: url.value,
+            type: isImageChecked ? 'image' : 'video',
             description: description.value,
         });
     };
@@ -82,27 +78,46 @@ const GalleryModal = ({ heading, onClose, onSubmit, initialData }: GalleryModalP
     return (
         <div className="video-modal-wrapper">
             <div className="modal-heading">{heading}</div>
-            <div className="video-modal-inputs">
-                <Input
-                    placeholder="Enter Image URL"
-                    label="Image URL"
-                    onChange={onImageChange}
-                    onBlur={onImageBlur}
-                    value={image.value}
-                />
-                <Input
-                    component="Textarea"
-                    placeholder="Enter Description"
-                    label="Description"
-                    onChange={onDescriptionChange}
-                    onBlur={onDescriptionBlur}
-                    value={description.value}
-                />
-            </div>
-            <div className="video-modal-buttons">
-                <div className="secondary-button" onClick={onClose}>
-                    Cancel
+
+            <Input
+                label="File URL"
+                placeholder="Enter Google Drive URL"
+                value={url.value}
+                onChange={onUrlChange}
+                onBlur={onUrlBlur}
+                errortext={url.touched && url.error ? url.error : ''}
+            />
+
+            <div className="radio-group">
+                <label>Select type:</label>
+                <div style={{ display: 'flex', gap: '20px', marginTop: '5px' }}>
+                    <Radio
+                        label="Image"
+                        onClick={() => handleRadioSelect('image')}
+                        labelClick={() => handleRadioSelect('image')}
+                        classes={isImageChecked ? 'checked' : ''}
+                    />
+                    <Radio
+                        label="Video"
+                        onClick={() => handleRadioSelect('video')}
+                        labelClick={() => handleRadioSelect('video')}
+                        classes={isVideoChecked ? 'checked' : ''}
+                    />
                 </div>
+            </div>
+
+            <Input
+                component="Textarea"
+                label="Description"
+                placeholder="Enter description"
+                value={description.value}
+                onChange={onDescriptionChange}
+                onBlur={onDescriptionBlur}
+                errortext={description.touched && description.error ? description.error : ''}
+            />
+
+            <div className="video-modal-buttons">
+                <div className="secondary-button" onClick={onClose}>Cancel</div>
                 <button
                     className={`primary-button ${!isFormValid ? 'disabled' : ''}`}
                     onClick={handleSubmit}
