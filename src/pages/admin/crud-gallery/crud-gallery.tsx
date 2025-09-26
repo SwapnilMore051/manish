@@ -132,6 +132,7 @@ const CrudGallery = () => {
                     <div className="table-row">
                         <div className="table-cell">Preview</div>
                         <div className="table-cell">Description</div>
+                        <div className="table-cell">Link</div>
                         <div className="table-cell">Actions</div>
                     </div>
                 </div>
@@ -161,6 +162,7 @@ const CrudGallery = () => {
                             </div>
 
                             <div className="table-cell">{item.description}</div>
+                            <div className="table-cell">{item.url}</div>
                             <div className="table-cell action-buttons">
                                 <img
                                     className="crud-action-icons"
