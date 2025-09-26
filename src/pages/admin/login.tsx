@@ -4,6 +4,7 @@ import EmailInput from "../../components/inputs/email-input";
 import PasswordInput from "../../components/inputs/password-input";
 import type { InputState } from "../../components/models/input";
 import { useAuth } from "../../context/AuthContext";
+import './login.scss';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -58,38 +59,43 @@ const Login = () => {
       setErrorMessage("Incorrect credentials");
     }
   };
+  
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white shadow-md rounded-2xl p-8 w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <EmailInput
-            customLabel="Email or Number"
-            parentState={emailState}
-            parentStateChanger={setEmailState}
-            initialFocus={false} />
+    <div className="main-login-wrapper">
+      <div className="login-form-wrapper">
+        <div className="login-text">Login</div>
 
-          <PasswordInput
-            value={passwordState.value}
-            errortext={passwordState.error}
-            onChange={handlePasswordChange}
-            onBlur={handlePasswordBlur}
-          />
+        <form onSubmit={handleSubmit} className="login-form">
+          <div className="login-inputs">
+            <EmailInput
+              customLabel="Email or Number"
+              parentState={emailState}
+              parentStateChanger={setEmailState}
+              initialFocus={false} />
 
+            <PasswordInput
+              value={passwordState.value}
+              errortext={passwordState.error}
+              onChange={handlePasswordChange}
+              onBlur={handlePasswordBlur}
+            />
+
+          </div>
           {errorMessage && (
-            <p className="text-red-500 text-sm text-center">{errorMessage}</p>
+            <div className="error-text">{errorMessage}</div>
           )}
 
           <button
             type="submit"
-            className="primary-button"
+            className="primary-button max-width-100"
+             disabled={!emailState.isValid || !passwordState.value}
           >
             Login
           </button>
         </form>
       </div>
-    </div>
+    </div >
   );
 };
 

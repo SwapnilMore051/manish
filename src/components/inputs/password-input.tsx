@@ -27,7 +27,7 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>((props, r
                     {...rest}
                 ></Input>
                 <div className="visible-icon-container">
-                    <img src={isPasswordVisible ? '/icons/ic_visible.svg' : '/icons/ic_invisible.svg'} onClick={onPasswordIconClick} />
+                    <img src={isPasswordVisible ? 'assets/icons/ic_visible.svg' : 'assets/icons/ic_invisible.svg'} onClick={onPasswordIconClick} />
                 </div>
             </div>
         </>
