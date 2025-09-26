@@ -8,6 +8,7 @@ import Toast from '../../../components/toast/toast';
 import ConfirmationModal from '../../../components/confirmation-modal/confirmation-modal';
 import API from '../../../api/endpoints';
 import "../../../../src/components/common-api-table.scss";
+import Loader from '../../../components/loader/loader';
 
 type VideoFormData = {
     _id?: string;
@@ -21,14 +22,44 @@ const CrudVideo = () => {
     const [videoModal, setVideoModal] = useState(false);
     const [editVideo, setEditVideo] = useState<VideoFormData | null>(null);
     const [deleteVideoModal, setDeleteVideoModal] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const loaderRef = useRef<HTMLDivElement | null>(null);
 
     const toastRef = useRef<ToastRefType>(null);
     const showToast = ({ type, message }: any) => {
         toastRef?.current?.showToast({ type, message });
     };
 
-    //  Fetch all videos
+    // Detect if URL is YouTube/Vimeo embed or a direct video file
+    const renderVideo = (video: VideoFormData) => {
+        const url = video.url;
+
+        // YouTube or Vimeo embed
+        if (url.includes("youtube.com") || url.includes("vimeo.com")) {
+            return (
+                <iframe
+                    className="crud-video-sample"
+                    src={url}
+                    title={video.title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                ></iframe>
+            );
+        }
+
+        // Otherwise assume direct file (e.g. .mp4)
+        return (
+            <video className="crud-video-sample" controls>
+                <source src={url} type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+        );
+    };
+
+    // Fetch all videos
     const fetchVideos = async () => {
+        setIsLoading(true);
         try {
             const res = await fetch(API.VIDEOS.GET_ALL);
             const result = await res.json();
@@ -37,6 +68,8 @@ const CrudVideo = () => {
             }
         } catch (err) {
             console.error(err);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -44,7 +77,7 @@ const CrudVideo = () => {
         fetchVideos();
     }, []);
 
-    //  Add / Update
+    // Add / Update
     const handleVideoFormSubmit = async (data: VideoFormData) => {
         try {
             const method = data._id ? 'PUT' : 'POST';
@@ -120,40 +153,37 @@ const CrudVideo = () => {
                         <div className="table-cell">Actions</div>
                     </div>
                 </div>
-                <div className="table-body">
-                    {videos.map((video) => (
-                        <div className="table-row" key={video._id}>
-                            <div className="table-cell">{video.title}</div>
-                            <div className="table-cell">{video.description}</div>
-                            <div className="table-cell">
-                                <iframe
-                                    className="crud-video-sample"
-                                    src={video.url}
-                                    title={video.title}
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowFullScreen
-                                ></iframe>
-                            </div>
-                            <div className="table-cell action-buttons">
-                                <img
-                                    className="crud-action-icons"
-                                    src="/assets/icons/ic_edit_pen_grey.svg"
-                                    alt="Edit"
-                                    onClick={() => openEditVideoModal(video)}
-                                />
-                                <img
-                                    className="crud-action-icons"
-                                    src="/assets/icons/trash.svg"
-                                    alt="Delete"
-                                    onClick={() => {
-                                        setEditVideo(video);
-                                        setDeleteVideoModal(true);
-                                    }}
-                                />
-                            </div>
+                <div className='table-body' ref={loaderRef}>
+                    {isLoading ? (
+                        <div className="table-loader-container">
+                            <Loader smallWidthLoader={false} />
                         </div>
-                    ))}
+                    ) : (
+                        videos.map((video) => (
+                            <div className="table-row" key={video._id}>
+                                <div className="table-cell">{video.title}</div>
+                                <div className="table-cell">{video.description}</div>
+                                <div className="table-cell">{renderVideo(video)}</div>
+                                <div className="table-cell action-buttons">
+                                    <img
+                                        className="crud-action-icons"
+                                        src="/assets/icons/ic_edit_pen_grey.svg"
+                                        alt="Edit"
+                                        onClick={() => openEditVideoModal(video)}
+                                    />
+                                    <img
+                                        className="crud-action-icons"
+                                        src="/assets/icons/trash.svg"
+                                        alt="Delete"
+                                        onClick={() => {
+                                            setEditVideo(video);
+                                            setDeleteVideoModal(true);
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        ))
+                    )}
                 </div>
             </div>
 

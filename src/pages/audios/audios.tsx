@@ -16,7 +16,8 @@ const Audios = () => {
                 {audioList.map((audio, index) => (
                     <div key={index} className="audio-item">
                         <img className='audio-cover-image' src={audio.image} alt="/assets/icons/audio-img-2.jpg" />
-                        <audio controls>
+                        <audio controls
+                            controlsList="nodownload">
                             <source src={`/assets/audios/${audio.file}`} type="audio/mpeg" />
                         </audio>
                         <div className="audio-description">{audio.description}</div>

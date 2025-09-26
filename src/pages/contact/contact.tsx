@@ -39,6 +39,12 @@ const Contact = () => {
           </div>
         ))}
       </div>
+      <div className="copyright">© 2025 Manish More | Built by 
+        <a className="author-link" href="https://www.linkedin.com/in/swapnil-more-966509227" target="_blank" rel="noopener noreferrer">
+          {""} Swapnil More
+        </a>
+        .</div>
+
     </div>
   );
 };

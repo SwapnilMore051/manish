@@ -129,7 +129,8 @@ const CrudAudio = () => {
                     {audios.map((audio) => (
                         <div className="table-row" key={audio._id}>
                             <div className="table-cell">
-                                <audio controls>
+                                <audio controls
+                                    controlsList="nodownload">
                                     <source src={audio.audio} type="audio/mpeg" />
                                 </audio>
                             </div>

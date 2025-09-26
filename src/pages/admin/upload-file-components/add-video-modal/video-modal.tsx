@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Input from '../../../../components/inputs/input';
 import './video-modal.scss';
+import getYouTubeEmbedUrl from '../../../../utils/embed-youtube-url';
 
 type VideoFormData = {
     _id?: string;
@@ -60,7 +61,8 @@ const VideoModal = ({ heading, onClose, onSubmit, initialData }: VideoModalProps
     const onUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         const error = validateUrl(value);
-        setUrl({ value, touched: true, error, isValid: !error });
+        const embedUrl = value ? getYouTubeEmbedUrl(value) : "";
+        setUrl({ value: embedUrl, touched: true, error, isValid: !error });
     };
 
     const onDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {

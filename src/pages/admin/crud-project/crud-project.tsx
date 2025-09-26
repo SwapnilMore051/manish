@@ -8,12 +8,15 @@ import type { ToastRefType } from '../../../components/models/toast';
 import Toast from '../../../components/toast/toast';
 import ConfirmationModal from '../../../components/confirmation-modal/confirmation-modal';
 import API from '../../../api/endpoints';
+import Loader from '../../../components/loader/loader';
 
 const CrudProject = () => {
     const [projects, setProjects] = useState<any[]>([]);
     const [activeModal, setActiveModal] = useState<'add' | 'edit' | null>(null);
     const [editProject, setEditProject] = useState<any | null>(null);
     const [deleteProject, setDeleteProject] = useState<any | null>(null);
+    const [isLoading, setIsLoading] = useState(false)
+    const loaderRef = useRef<HTMLDivElement | null>(null);
     const toastRef = useRef<ToastRefType>(null);
 
     const showToast = ({ type, message }: any) => {
@@ -26,12 +29,15 @@ const CrudProject = () => {
     }, []);
 
     const fetchProjects = async () => {
+        setIsLoading(true);
         try {
             const res = await axios.get(API.PROJECTS.GET_ALL);
             setProjects(res.data.data);
         } catch (err) {
             console.error(err);
             showToast({ type: 'error', message: 'Failed to fetch projects' });
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -104,35 +110,45 @@ const CrudProject = () => {
                         <div className="table-cell">Actions</div>
                     </div>
                 </div>
-                <div className='table-body'>
-                    {projects.map((project) => (
-                        <div className='table-row' key={project._id}>
-                            <div className="table-cell">{project.name}</div>
-                            <div className="table-cell">{project.description}</div>
-                            <div className="table-cell">
-                                {project.link == 0 ?
-                                    <>No Link</> :
-                                    <a href={project.link} target="_blank" rel="noopener noreferrer">{project.link}</a>
-                                }
-
-                            </div>
-                            <div className="table-cell action-buttons">
-                                <img
-                                    className='crud-action-icons'
-                                    src="/assets/icons/ic_edit_pen_grey.svg"
-                                    alt="Edit"
-                                    onClick={() => openEditProjectModal(project)}
-                                />
-                                <img
-                                    className='crud-action-icons'
-                                    src="/assets/icons/trash.svg"
-                                    alt="Delete"
-                                    onClick={() => setDeleteProject(project)}
-                                />
-                            </div>
+                <div className='table-body' ref={loaderRef}>
+                    {isLoading ? (
+                        <div className="table-loader-container">
+                            <Loader smallWidthLoader={false} />
                         </div>
-                    ))}
+                    ) : (
+                        projects.map((project) => (
+                            <div className='table-row' key={project._id}>
+                                <div className="table-cell">{project.name}</div>
+                                <div className="table-cell">{project.description}</div>
+                                <div className="table-cell">
+                                    {!project.link ? (
+                                        <>No Link</>
+                                    ) : (
+                                        <a href={project.link} target="_blank" rel="noopener noreferrer">
+                                            {project.link}
+                                        </a>
+                                    )}
+                                </div>
+                                <div className="table-cell action-buttons">
+                                    <img
+                                        className='crud-action-icons'
+                                        src="/assets/icons/ic_edit_pen_grey.svg"
+                                        alt="Edit"
+                                        onClick={() => openEditProjectModal(project)}
+                                    />
+                                    <img
+                                        className='crud-action-icons'
+                                        src="/assets/icons/trash.svg"
+                                        alt="Delete"
+                                        onClick={() => setDeleteProject(project)}
+                                    />
+                                </div>
+                            </div>
+                        ))
+                    )}
                 </div>
+
+
             </div>
 
             {/* Add / Edit Project Modal */}

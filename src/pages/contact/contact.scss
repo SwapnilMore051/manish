@@ -37,6 +37,15 @@
   width: 36px;
 }
 
+.copyright {
+  font-size: 16;
+  padding-bottom: 16px;
+}
+
+.author-link {
+  text-decoration: none;
+}
+
 @media screen and (max-width: 768px) {
   .contact-wrapper {
     flex-wrap: wrap;

@@ -149,7 +149,7 @@ const About = () => {
             <div className="project-image-description" key={index}>
               <img
                 className="project-cover-image"
-                src={project.cover_image || "/assets/icons/placeholder.jpg"}
+                src={project.cover_image || "/assets/icons/no-preview.jpg"}
                 alt={project.project}
                 onClick={() => onProjectImageClick(project.cover_image)}
               />
