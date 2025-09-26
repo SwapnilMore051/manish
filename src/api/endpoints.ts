@@ -20,7 +20,13 @@ export const API = {
     GET_ALL: `${BASE_URL}/audios`,
     UPDATE: (id: string) => `${BASE_URL}/audios/${id}`,
     DELETE: (id: string) => `${BASE_URL}/audios/${id}`,
-  }
+  },
+  GALLERY: {
+    CREATE: `${BASE_URL}/gallery`,
+    GET_ALL: `${BASE_URL}/gallery`,
+    UPDATE: (id: string) => `${BASE_URL}/gallery/${id}`,
+    DELETE: (id: string) => `${BASE_URL}/gallery/${id}`,
+  },
 };
 
 export default API;

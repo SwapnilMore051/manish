@@ -1,129 +1,198 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Modal from '../../../components/modal/modal';
 import CrudHeader from '../crud-header/crud-header';
 import GalleryModal from '../upload-file-components/add-gallery-modal/gallery-modal';
-import './crud-gallery.scss'
+import './crud-gallery.scss';
 import type { ToastRefType } from '../../../components/models/toast';
 import Toast from '../../../components/toast/toast';
 import ConfirmationModal from '../../../components/confirmation-modal/confirmation-modal';
+import API from '../../../api/endpoints';
+
+type GalleryFormData = {
+    _id?: string;
+    image: string;
+    description: string;
+};
 
 const CrudGallery = () => {
-
-    const [uploadGalleryModal, setUploadGalleryModal] = useState(false);
-    const [editGalleryModal, setEditGalleryModal] = useState(false);
+    const [gallery, setGallery] = useState<GalleryFormData[]>([]);
+    const [galleryModal, setGalleryModal] = useState(false);
+    const [editGallery, setEditGallery] = useState<GalleryFormData | null>(null);
     const [deleteGalleryModal, setDeleteGalleryModal] = useState(false);
-
-    const closeUloadGalleryModal = () => setUploadGalleryModal(false);
-    const openUploadGalleryModal = () => setUploadGalleryModal(true);
 
     const toastRef = useRef<ToastRefType>(null);
     const showToast = ({ type, message }: any) => {
         toastRef?.current?.showToast({ type, message });
     };
 
-    const onConfirmDelete = () => {
-        showToast({ type: "success", message: "Video deleted successfully!" });
-        setDeleteGalleryModal(false);
-    }
+    // Fetch all gallery items
+    const fetchGallery = async () => {
+        try {
+            const res = await fetch(API.GALLERY.GET_ALL);
+            const result = await res.json();
+            if (result.status === 'success') {
+                setGallery(result.data);
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
-    const onUploadSubmit = () => {
-        showToast({ type: "success", message: "Video Uploaded successfully!" });
-        setUploadGalleryModal(false)
-    }
-    const onEditSubmit = () => {
-        showToast({ type: "success", message: "Video Edited successfully!" });
-        setEditGalleryModal(false)
-    }
+    useEffect(() => {
+        fetchGallery();
+    }, []);
 
-    const onConfirmCancel = () => {
-        setDeleteGalleryModal(false);
-    }
+    // Add / Update
+    const handleGalleryFormSubmit = async (data: GalleryFormData) => {
+        try {
+            const method = data._id ? 'PUT' : 'POST';
+            const url = data._id ? API.GALLERY.UPDATE(data._id) : API.GALLERY.CREATE;
 
-    const deleteGallery = () => {
-        setDeleteGalleryModal(true);
-    }
+            const response = await fetch(url, {
+                method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
 
-    const editGallery = () => {
-        setEditGalleryModal(true);
-    }
+            const result = await response.json();
 
-    const closeEditGalleryModal = () => {
-        setEditGalleryModal(false);
-    }
+            if (result.status === 'success') {
+                showToast({
+                    type: 'success',
+                    message: data._id ? 'Gallery updated!' : 'Gallery added!',
+                });
+                setGalleryModal(false);
+                setEditGallery(null);
+                fetchGallery();
+            } else {
+                showToast({ type: 'error', message: 'Failed to save gallery item.' });
+            }
+        } catch (err) {
+            console.error(err);
+            showToast({ type: 'error', message: 'Error saving gallery item.' });
+        }
+    };
 
+    // Open Add Modal
+    const openAddGalleryModal = () => {
+        setEditGallery(null);
+        setGalleryModal(true);
+    };
 
+    // Open Edit Modal
+    const openEditGalleryModal = (item: GalleryFormData) => {
+        setEditGallery(item);
+        setGalleryModal(true);
+    };
+
+    // Delete
+    const handleDelete = async () => {
+        if (!editGallery?._id) return;
+        try {
+            await fetch(API.GALLERY.DELETE(editGallery._id), { method: 'DELETE' });
+            setDeleteGalleryModal(false);
+            showToast({ type: 'success', message: 'Gallery item deleted!' });
+            setGallery(gallery.filter((g) => g._id !== editGallery._id));
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const closeGalleryModal = () => {
+        setGalleryModal(false);
+        setEditGallery(null);
+    };
 
     return (
-        <div className='crud-gallery-wrapper'>
-
+        <div className="crud-gallery-wrapper">
+            <Toast ref={toastRef} />
             <CrudHeader
                 title="Upload or update gallery"
                 fileType="Add Gallery"
-                onClick={openUploadGalleryModal} />
+                onClick={openAddGalleryModal}
+            />
 
-            {uploadGalleryModal &&
-                <Modal isCloseAvailable={true} isOverlayClickable={true} isOverlayVisible={true} onClose={closeUloadGalleryModal}>
-                    <GalleryModal heading="Upload File" onClose={closeUloadGalleryModal} onSubmit={onUploadSubmit} />
-                </Modal>
-            }
-
-            {editGalleryModal &&
-                <Modal isCloseAvailable={true} isOverlayClickable={true} isOverlayVisible={true} onClose={closeEditGalleryModal}>
-                    <GalleryModal heading="Edit File" onClose={closeEditGalleryModal} onSubmit={onEditSubmit} />
-                </Modal>
-            }
-
-            <Toast ref={toastRef} />
-            {/* Videos will come from backend or database here */}
-            <div className='table'>
+            {/* Table */}
+            <div className="table">
                 <div className="table-header">
                     <div className="table-row">
-                        <div className="table-cell">Image / Video</div>
+                        <div className="table-cell">Image</div>
                         <div className="table-cell">Description</div>
+                        <div className="table-cell">Link</div>
                         <div className="table-cell">Actions</div>
                     </div>
                 </div>
-                <div className='table-body'>
-                    <div className="table-row">
-                        <div className="table-cell">
-                            <img src="/assets/icons/bts1.jpg" alt="" style={{ width: "100%", height: "100%" }} />
+                <div className="table-body">
+                    {gallery.map((item) => (
+                        <div className="table-row" key={item._id}>
+                            <div className="table-cell">
+                                <img
+                                    src={item.image}
+                                    alt="Gallery item"
+                                    style={{ width: '120px', height: 'auto' }}
+                                />
+                            </div>
+                            <div className="table-cell">{item.description}</div>
+                            <div className="table-cell">{item.image}</div>
+                            <div className="table-cell action-buttons">
+                                <img
+                                    className="crud-action-icons"
+                                    src="/assets/icons/ic_edit_pen_grey.svg"
+                                    alt="Edit"
+                                    onClick={() => openEditGalleryModal(item)}
+                                />
+                                <img
+                                    className="crud-action-icons"
+                                    src="/assets/icons/trash.svg"
+                                    alt="Delete"
+                                    onClick={() => {
+                                        setEditGallery(item);
+                                        setDeleteGalleryModal(true);
+                                    }}
+                                />
+                            </div>
                         </div>
-                        <div className="table-cell">
-                            Foley work from Kichadi Bhat short film
-                        </div>
-                        <div className="table-cell action-buttons">
-                            <img className='crud-action-icons' src="/assets/icons/ic_edit_pen_grey.svg" alt="Edit" onClick={editGallery} />
-                            <img className='crud-action-icons' src="/assets/icons/trash.svg" alt="Delete" onClick={deleteGallery} />
-                        </div>
-
-                    </div>
+                    ))}
                 </div>
             </div>
 
-            {deleteGalleryModal &&
+            {/* Add/Edit Modal */}
+            {galleryModal && (
+                <Modal
+                    isCloseAvailable
+                    isOverlayClickable
+                    isOverlayVisible
+                    onClose={closeGalleryModal}
+                >
+                    <GalleryModal
+                        heading={editGallery ? 'Edit Gallery' : 'Add Gallery'}
+                        onClose={closeGalleryModal}
+                        onSubmit={handleGalleryFormSubmit}
+                        initialData={editGallery ?? undefined}
+                    />
+                </Modal>
+            )}
 
+            {/* Delete Modal */}
+            {deleteGalleryModal && (
                 <ConfirmationModal
                     closeModalCb={() => setDeleteGalleryModal(false)}
                     modalData={{
-                        title: "Delete Video",
-                        description: "Are you sure you want to delete this video?"
+                        title: 'Delete Gallery Item',
+                        description: 'Are you sure you want to delete this item?',
                     }}
                     footerButtons={[
                         {
-                            name: "Cancel",
-                            type: "secondary-button",
-                            clickAction: onConfirmCancel
+                            name: 'Cancel',
+                            type: 'secondary-button',
+                            clickAction: () => setDeleteGalleryModal(false),
                         },
-                        {
-                            name: "Delete",
-                            type: "primary-button",
-                            clickAction: onConfirmDelete
-                        }
+                        { name: 'Delete', type: 'primary-button', clickAction: handleDelete },
                     ]}
                 />
-            }
+            )}
         </div>
-    )
-}
+    );
+};
 
-export default CrudGallery
+export default CrudGallery;
