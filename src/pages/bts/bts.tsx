@@ -11,12 +11,14 @@ const BehindTheScene = () => {
     { type: "image", src: "bts5.jpg" },
     { type: "image", src: "bts3.jpg" },
     { type: "image", src: "bts6.jpeg" },
-    // {
-    //   type: "image",
-    //   src: "https://drive.google.com/thumbnail?id=1B_Li1zb6eZVkh6pgBK9yasRpuyeUC5Xx"
-    // },
     { type: "video", src: "manish_vid1.mp4" },
     { type: "video", src: "manish_vid2.mp4" },
+    {
+      type: "video",
+      src: "https://res.cloudinary.com/didtglcy3/video/upload/q_auto,f_auto/video_20251231_120519_wtatrx",
+      poster:
+        "https://res.cloudinary.com/didtglcy3/video/upload/so_1/video_20251231_120519_wtatrx.jpg",
+    },
   ];
 
   const handleMediaClick = (index: number) => {
@@ -77,10 +79,18 @@ const BehindTheScene = () => {
             ) : (
               <video
                 className="bts-image"
-                src={`/assets/videos/${media.src}`}
+                src={
+                  media.src.startsWith("http")
+                    ? media.src
+                    : `/assets/videos/${media.src}`
+                }
+                poster={media?.poster}
                 muted
+                loop // later Added the loop attribute if it's not woking remove it -swapnil more
                 autoPlay
-                loop
+                playsInline
+                preload="metadata"
+                onEnded={(e) => (e.currentTarget.currentTime = 0)}
               />
             )}
           </div>
@@ -103,9 +113,16 @@ const BehindTheScene = () => {
             ) : (
               <video
                 className="modal-video"
-                src={`/assets/videos/${btsMedia[selectedIndex].src}`}
+                src={
+                  btsMedia[selectedIndex].src.startsWith("http")
+                    ? btsMedia[selectedIndex].src
+                    : `/assets/videos/${btsMedia[selectedIndex].src}`
+                }
                 controls
                 autoPlay
+                playsInline
+                preload="metadata"
+                onEnded={(e) => (e.currentTarget.currentTime = 0)}
               />
             )}
 
