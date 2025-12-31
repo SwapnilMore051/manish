@@ -14,6 +14,10 @@ const Videos = () => {
       url: "https://www.youtube.com/embed/f6mBSTCDAJM",
       description: "Creative foley demonstration in short film scene",
     },
+    {
+      url: "https://www.youtube.com/embed/BlPI35qWG7M",
+      description: "Foley work from Souled Out web series",
+    }
   ];
 
   return (

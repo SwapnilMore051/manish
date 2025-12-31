@@ -20,7 +20,7 @@ const AdminHeader = () => {
     return (
         <div className="admin-header-wrapper">
             <div className="admin-profile">
-                <img src="/assets/logo.jpg" alt="Logo" width={30} />
+                <img src="/assets/logo.png" alt="Logo" width={30} />
                 <div className="admin-name">Manish More</div>
             </div>
             <div className="admin-title">Admin Panel</div>
