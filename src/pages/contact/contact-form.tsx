@@ -1,7 +1,7 @@
 
 
 const ContactForm = () => {
-    return ( 
+    return (
         <div>
             <input type="text" placeholder="Name" />
             <input type="text" placeholder="email" />
