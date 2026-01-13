@@ -3,8 +3,12 @@ import "./about.scss";
 import Modal from "../../components/modal/modal";
 
 const About = () => {
-  const [expandedDescriptions, setExpandedDescriptions] = useState<number[]>([]);
-  const [selectedCoverImage, setSelectedCoverImage] = useState<string | null>(null);
+  const [expandedDescriptions, setExpandedDescriptions] = useState<number[]>(
+    []
+  );
+  const [selectedCoverImage, setSelectedCoverImage] = useState<string | null>(
+    null
+  );
 
   const toggleDescription = (index: number) => {
     setExpandedDescriptions((prev) =>
@@ -112,6 +116,7 @@ const About = () => {
       cover_image: "/assets/icons/kaka_halwai.jpg",
       description:
         "I worked as a Boom Operator for the advertisement of 'Kaka Halwai,' where I was responsible for capturing high-quality on-set audio, ensuring clear dialogue and ambient sound to support the production’s overall sound design.",
+      link: "https://youtube.com/shorts/h65xERcr44A?si=YjNgqbW35qkr_AOB",
     },
   ];
 
@@ -195,7 +200,11 @@ const About = () => {
           isCloseAvailable={true}
           onClose={closeProjectCover}
         >
-          <img src={selectedCoverImage} alt="Project Cover" className="modal-project-image" />
+          <img
+            src={selectedCoverImage}
+            alt="Project Cover"
+            className="modal-project-image"
+          />
         </Modal>
       )}
     </div>
